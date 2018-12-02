@@ -1,1 +1,5 @@
 /_data/
+node_modules/
+yarn-error.log
+/coverage
+/dist/main.js
