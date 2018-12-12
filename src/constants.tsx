@@ -3,6 +3,9 @@ interface Config {
     host: string
     port: string
   }
+  slack: {
+    workspace: string
+  }
 }
 
 declare const CONFIG: Config

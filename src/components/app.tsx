@@ -22,7 +22,7 @@ interface State {
 
 class App extends React.Component<{}, State> {
   public state = { inputValue: '', sources: [] as Source[] }
-  private url = 'https://iwailab.slack.com'
+  private url = `https://${CONFIG.slack.workspace}.slack.com`
   public render() {
     return (
       <div>
@@ -47,6 +47,7 @@ class App extends React.Component<{}, State> {
               </p>
               <p>
                 <a
+                  // TODO ひとまずgeneralのチャンネル IDにしてある
                   href={`${this.url}/messages/C02TM1NRB/team/${source.user}`}
                   target="_blank"
                 >

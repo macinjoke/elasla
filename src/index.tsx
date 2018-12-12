@@ -5,6 +5,4 @@ import { CONFIG } from './constants'
 
 const element = document.getElementById('app')
 
-console.log(CONFIG)
-
 render(<App />, element)
