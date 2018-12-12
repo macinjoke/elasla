@@ -1,4 +1,5 @@
 import { Client, SearchResponse } from 'elasticsearch'
+import { Moment, unix } from 'moment'
 import React, { ChangeEvent } from 'react'
 
 interface Source {
@@ -20,6 +21,7 @@ interface State {
 
 class App extends React.Component<{}, State> {
   public state = { inputValue: '', sources: [] as Source[] }
+  private url = 'https://iwailab.slack.com'
   public render() {
     return (
       <div>
@@ -37,27 +39,38 @@ class App extends React.Component<{}, State> {
           <h2>result</h2>
           {this.state.sources.map(source => (
             <div style={{ border: 'solid 0.1rem black' }}>
-              <a
-                href={`https://iwailab.slack.com/messages/C02TM1NRB/team/${
-                  source.user
-                }`}
-              >
-                {source.user_name}
-              </a>
+              <p>
+                <a href={`${this.url}/messages/${source.channel_name}`}>
+                  {source.channel_name}
+                </a>
+              </p>
+              <p>
+                <a
+                  href={`${this.url}/messages/C02TM1NRB/team/${source.user}`}
+                  target="_blank"
+                >
+                  {source.user_name}
+                </a>{' '}
+                <a
+                  href={`${this.url}/archives/${source.channel_name}/p${
+                    source.ts
+                  }`}
+                  target="_blank"
+                >
+                  {this.unixToFormatted(source.ts)}
+                </a>
+              </p>
               <p>{source.text}</p>
-              <a
-                href={`https://iwailab.slack.com/archives/${
-                  source.channel_name
-                }/p${source.ts}`}
-              >
-                link
-              </a>
             </div>
           ))}
         </div>
       </div>
     )
   }
+  private unixToFormatted = (str: string): string => {
+    return unix(parseFloat(str)).format('YYYY/M/D HH:mm(ddd)')
+  }
+
   private handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const response = await this.search(this.state.inputValue)
