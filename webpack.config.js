@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 
 module.exports = {
   mode: 'development',
@@ -10,6 +11,9 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new webpack.DefinePlugin({ CONFIG: JSON.stringify(require("config")) })
+  ],
   resolve: {
     extensions: [
       '.ts', '.tsx', '.js'

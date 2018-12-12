@@ -1,6 +1,7 @@
 import { Client, SearchResponse } from 'elasticsearch'
 import { Moment, unix } from 'moment'
 import React, { ChangeEvent } from 'react'
+import { CONFIG } from '../constants'
 
 interface Source {
   type: string
@@ -82,8 +83,9 @@ class App extends React.Component<{}, State> {
     this.setState({ inputValue: e.currentTarget.value })
   }
   private search = async (text: string) => {
+    const { host, port } = CONFIG.elasticsearch
     const client = new Client({
-      host: 'localhost:9200',
+      host: `${host}:${port}`,
       log: 'trace',
     })
     const response: SearchResponse<Source> = await client.search({
