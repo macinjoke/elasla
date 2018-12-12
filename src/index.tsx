@@ -1,6 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
+import App from './components/app'
 
 const element = document.getElementById('app')
 
-render(<div>hello, react</div>, element)
+render(<App />, element)
