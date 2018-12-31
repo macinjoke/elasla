@@ -2,6 +2,7 @@ import { Client, SearchResponse } from 'elasticsearch'
 import { Moment, unix } from 'moment'
 import React, { ChangeEvent } from 'react'
 import { CONFIG } from '../constants'
+import Auth from "./auth";
 
 interface Source {
   type: string
@@ -27,6 +28,7 @@ class App extends React.Component<{}, State> {
     return (
       <div>
         <h1>elasla</h1>
+        <Auth />
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
