@@ -26,7 +26,7 @@ class Auth extends React.Component {
   public render() {
     return (
       <div>
-        <h1>Auth</h1>
+        <h2>Auth</h2>
         <button onClick={this.handleLocalAuthClick}>local auth request</button>
         <form action="http://localhost:3000/api/secure/local" method="post">
           <div>
