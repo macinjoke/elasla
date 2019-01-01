@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { FormEvent } from 'react'
 
-class Auth extends React.Component {
+interface Props {
+  isLogin: boolean
+  login: (username: string, password: string) => void
+}
+
+class Auth extends React.Component<Props> {
   public handleLocalAuthClick = async () => {
     const data = {
       username: 'test',
@@ -16,7 +21,7 @@ class Auth extends React.Component {
     console.log(text)
   }
 
-  public fetch_some_data = async () => {
+  public fetchSomeData = async () => {
     const response = await fetch('http://localhost:3000/api/some_data')
     const data = await response.json()
     console.log(response)
@@ -28,22 +33,34 @@ class Auth extends React.Component {
       <div>
         <h2>Auth</h2>
         <button onClick={this.handleLocalAuthClick}>local auth request</button>
-        <form action="http://localhost:3000/api/secure/local" method="post">
-          <div>
-            <label>Username:</label>
-            <input type="text" name="username" />
-            <br />
-          </div>
-          <div>
-            <label>Password:</label>
-            <input type="password" name="password" />
-          </div>
-          <div>
-            <input type="submit" value="Submit" />
-          </div>
+        <form onSubmit={this.handleSubmit}>
+          <ul>
+            <li>
+              <p>Username</p>
+              <p>
+                <input type="text" name="username" required />
+              </p>
+            </li>
+            <li>
+              <p>Password</p>
+              <p>
+                <input type="password" name="password" required />
+              </p>
+            </li>
+          </ul>
+          {/*{auth.error && <p>{auth.error}</p>}*/}
+          <input type="submit" value="Send" />
         </form>
       </div>
     )
+  }
+
+  private handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    console.log('submit')
+    e.preventDefault()
+    const { login } = this.props
+    const target = e.currentTarget
+    login(target.username.value, target.password.value)
   }
 }
 
