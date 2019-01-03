@@ -1,4 +1,4 @@
-import { Action, ActionCreator } from 'redux'
+import { Action, ActionCreator, AnyAction } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import { State } from '../reducers'
 
@@ -15,7 +15,6 @@ export const login = (
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, password }),
   })
-  console.log(response)
   if (response.status === 401) {
     console.log('パスワードが違います (本当はレンダリングしたい)')
   }
@@ -23,9 +22,43 @@ export const login = (
     console.log(await response.text())
     return
   }
-  dispatch(loginSuccess())
+  const body = await response.json()
+  localStorage.setItem('jwt', body.jwt)
+  dispatch(loginSuccess(body))
 }
 
-export const loginSuccess = (): Action<string> => ({
+export const loginSuccess = (body: object): AnyAction => ({
   type: 'loginSuccess',
+  body,
 })
+
+export const fetchLoginState = (): ThunkAction<
+  void,
+  State,
+  undefined,
+  Action<string>
+> => async dispatch => {
+  const jwt = localStorage.getItem('jwt')
+  if (!jwt) return
+
+  const response = await fetch('http://localhost:3000/api/login', {
+    headers: { authorization: `Bearer ${jwt}` },
+  })
+  if (response.status !== 200) {
+    console.log(await response.json()) // TODO
+  }
+  const body = await response.json()
+  dispatch(loginSuccess({ ...body, jwt }))
+}
+
+export const logout = (): ThunkAction<
+  void,
+  State,
+  undefined,
+  Action<string>
+> => dispatch => {
+  localStorage.removeItem('jwt')
+  dispatch(logoutState())
+}
+
+export const logoutState = (): Action<string> => ({ type: 'logoutState' })

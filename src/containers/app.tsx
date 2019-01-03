@@ -8,6 +8,8 @@ import { State } from '../reducers'
 interface DispatchProps {
   hogeAction: () => void
   login: (username: string, password: string) => void
+  fetchLoginState: () => void
+  logout: () => void
 }
 
 type StateProps = State
@@ -15,12 +17,29 @@ type StateProps = State
 type Props = DispatchProps & StateProps
 
 class App extends React.Component<Props> {
+  public componentWillMount() {
+    const { fetchLoginState } = this.props
+    fetchLoginState()
+  }
+
   public render() {
-    const { hoge, isLogin, login } = this.props
+    const { hoge, isLogin, login, logout, user } = this.props
     return (
       <div>
         <h1>elasla</h1>
-        {isLogin ? <Elastic /> : <Auth isLogin={isLogin} login={login} />}
+        {isLogin ? (
+          [<Elastic />, <button onClick={logout}>Logout</button>]
+        ) : (
+          <Auth isLogin={isLogin} login={login} />
+        )}
+        <h2>User Info</h2>
+        {user && (
+          <div>
+            <p>username: {user.username}</p>
+            <p>password: {user.password}</p>
+            <p>jwt: {user.jwt}</p>
+          </div>
+        )}
         <button onClick={this.hoge}>hoge</button>
         <p>{hoge}</p>
       </div>
