@@ -2,10 +2,6 @@ import { Action, ActionCreator, AnyAction } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import { State } from '../reducers'
 
-export const hogeAction = (): Action<string> => ({
-  type: 'hogeAction',
-})
-
 export const login = (
   username: string,
   password: string,

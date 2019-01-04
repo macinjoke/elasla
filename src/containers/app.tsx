@@ -6,7 +6,6 @@ import Elastic from '../components/elastic'
 import { State } from '../reducers'
 
 interface DispatchProps {
-  hogeAction: () => void
   login: (username: string, password: string) => void
   fetchLoginState: () => void
   logout: () => void
@@ -23,7 +22,7 @@ class App extends React.Component<Props> {
   }
 
   public render() {
-    const { hoge, isLogin, login, logout, user } = this.props
+    const { isLogin, login, logout, user } = this.props
     return (
       <div>
         <h1>elasla</h1>
@@ -40,14 +39,8 @@ class App extends React.Component<Props> {
             <p>jwt: {user.jwt}</p>
           </div>
         )}
-        <button onClick={this.hoge}>hoge</button>
-        <p>{hoge}</p>
       </div>
     )
-  }
-  private hoge = () => {
-    const { hogeAction } = this.props
-    hogeAction()
   }
 }
 
