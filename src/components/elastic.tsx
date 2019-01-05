@@ -2,35 +2,26 @@ import { Client, SearchResponse } from 'elasticsearch'
 import { Moment, unix } from 'moment'
 import React from 'react'
 import { CONFIG } from '../constants'
+import { Source } from '../reducers'
 
-interface Source {
-  type: string
-  user: string // user id
+interface Props {
+  updateText: (text: string) => void
+  search: () => void
   text: string
-  ts: string
-  '@timestamp': string
-  hour_of_day: number
-  day_of_week: number
-  user_name: string
-  channel_name: string
-}
-
-interface State {
-  inputValue: string
   sources: Source[]
 }
 
-class Elastic extends React.Component {
-  public state = { inputValue: '', sources: [] as Source[] }
+class Elastic extends React.Component<Props> {
   private url = `https://${CONFIG.slack.workspace}.slack.com`
   public render() {
+    const { text, sources } = this.props
     return (
       <div>
         <h2>Elastic</h2>
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
-            value={this.state.inputValue}
+            value={text}
             onChange={this.handleChange}
             placeholder="search text"
           />
@@ -38,7 +29,7 @@ class Elastic extends React.Component {
         </form>
         <div>
           <h3>result</h3>
-          {this.state.sources.map(source => (
+          {sources.map(source => (
             <div style={{ border: 'solid 0.1rem black' }}>
               <p>
                 <a href={`${this.url}/messages/${source.channel_name}`}>
@@ -73,15 +64,14 @@ class Elastic extends React.Component {
     return unix(parseFloat(str)).format('YYYY/M/D HH:mm(ddd)')
   }
 
-  private handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  private handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const response = await this.search(this.state.inputValue)
-    const sources = response.hits.hits.map(hit => hit._source)
-    this.setState({ sources })
+    this.props.search()
   }
 
   private handleChange = (e: React.FormEvent<HTMLInputElement>) => {
-    this.setState({ inputValue: e.currentTarget.value })
+    const { updateText } = this.props
+    updateText(e.currentTarget.value)
   }
   private search = async (text: string) => {
     const { host, port } = CONFIG.elasticsearch

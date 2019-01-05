@@ -9,6 +9,8 @@ interface DispatchProps {
   login: (username: string, password: string) => void
   fetchLoginState: () => void
   logout: () => void
+  updateText: (text: string) => void
+  search: () => void
 }
 
 type StateProps = State
@@ -22,12 +24,29 @@ class App extends React.Component<Props> {
   }
 
   public render() {
-    const { isLogin, login, logout, user } = this.props
+    const {
+      isLogin,
+      login,
+      logout,
+      user,
+      updateText,
+      search,
+      text,
+      sources,
+    } = this.props
     return (
       <div>
         <h1>elasla</h1>
         {isLogin ? (
-          [<Elastic />, <button onClick={logout}>Logout</button>]
+          [
+            <Elastic
+              updateText={updateText}
+              search={search}
+              text={text}
+              sources={sources}
+            />,
+            <button onClick={logout}>Logout</button>,
+          ]
         ) : (
           <Auth isLogin={isLogin} login={login} />
         )}
