@@ -1,19 +1,19 @@
 import React, { ChangeEvent } from 'react'
 import { connect } from 'react-redux'
-import * as actions from '../actions'
+import { AnyAction, bindActionCreators } from 'redux'
+import { ThunkAction } from 'redux-thunk'
+import * as actions from '../actions/auth'
 import Auth from '../components/auth'
 import Elastic from '../components/elastic'
 import { State } from '../reducers'
+import { State as AuthState } from '../reducers/auth'
 
 interface DispatchProps {
-  login: (username: string, password: string) => void
   fetchLoginState: () => void
   logout: () => void
-  updateText: (text: string) => void
-  search: () => void
 }
 
-type StateProps = State
+type StateProps = AuthState
 
 type Props = DispatchProps & StateProps
 
@@ -24,31 +24,14 @@ class App extends React.Component<Props> {
   }
 
   public render() {
-    const {
-      isLogin,
-      login,
-      logout,
-      user,
-      updateText,
-      search,
-      text,
-      sources,
-    } = this.props
+    const { isLogin, user, logout } = this.props
     return (
       <div>
         <h1>elasla</h1>
         {isLogin ? (
-          [
-            <Elastic
-              updateText={updateText}
-              search={search}
-              text={text}
-              sources={sources}
-            />,
-            <button onClick={logout}>Logout</button>,
-          ]
+          [<Elastic />, <button onClick={logout}>Logout</button>]
         ) : (
-          <Auth isLogin={isLogin} login={login} />
+          <Auth />
         )}
         <h2>User Info</h2>
         {user && (
@@ -64,6 +47,13 @@ class App extends React.Component<Props> {
 }
 
 export default connect<StateProps, DispatchProps, {}, State>(
-  s => s,
-  actions,
+  s => s.auth,
+  dispatch =>
+    bindActionCreators(
+      {
+        fetchLoginState: actions.fetchLoginState,
+        logout: actions.logout,
+      },
+      dispatch,
+    ),
 )(App)

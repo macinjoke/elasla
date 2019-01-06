@@ -1,15 +1,20 @@
 import { Client, SearchResponse } from 'elasticsearch'
 import { Moment, unix } from 'moment'
 import React from 'react'
+import { connect } from 'react-redux'
+import * as actions from '../actions/elastic'
 import { CONFIG } from '../constants'
-import { Source } from '../reducers'
+import { State } from '../reducers'
+import { Source, State as ElasticState } from '../reducers/elastic'
 
-interface Props {
+interface DispatchProps {
   updateText: (text: string) => void
   search: () => void
-  text: string
-  sources: Source[]
 }
+
+type StateProps = ElasticState
+
+type Props = DispatchProps & ElasticState
 
 class Elastic extends React.Component<Props> {
   private url = `https://${CONFIG.slack.workspace}.slack.com`
@@ -94,4 +99,7 @@ class Elastic extends React.Component<Props> {
   }
 }
 
-export default Elastic
+export default connect<StateProps, DispatchProps, {}, State>(
+  s => s.elastic,
+  actions,
+)(Elastic)
