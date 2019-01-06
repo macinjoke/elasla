@@ -30,9 +30,12 @@ export const fetchLoginState = (): ThunkAction => async dispatch => {
   const response = await fetch('http://localhost:3000/api/login', {
     headers: { authorization: `Bearer ${jwt}` },
   })
-  if (response.status !== 200) {
-    console.log(await response.json()) // TODO
+  // localStorage.jwt が有効なものではなかった場合削除する
+  if (response.status === 400 || response.status === 401) {
+    localStorage.removeItem('jwt')
+    return
   }
+  if (response.status !== 200) return
   const body = await response.json()
   dispatch(loginSuccess({ ...body, jwt }))
 }
