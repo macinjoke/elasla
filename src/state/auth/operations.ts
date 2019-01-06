@@ -1,6 +1,6 @@
 import { Action } from 'redux'
 import { State, ThunkAction } from '../../types'
-import { loginSuccess, loginFailure, logoutState } from './actions'
+import { loginFailure, loginSuccess, logoutState } from './actions'
 
 export const login = (
   username: string,

@@ -1,12 +1,15 @@
-import { Action, Reducer } from 'redux'
+import { Reducer } from 'redux'
+import { Action } from './actions'
+
+export interface User {
+  username: string
+  password: string
+  jwt: string
+}
 
 export interface State {
   isLogin: boolean
-  user: {
-    username: string
-    password: string
-    jwt: string
-  }
+  user: User
   loginErrorMessage: string
 }
 
@@ -16,7 +19,7 @@ const initialState: State = {
   loginErrorMessage: '',
 }
 
-const reducer: Reducer<State> = (state = initialState, action) => {
+const reducer: Reducer<State, Action> = (state = initialState, action) => {
   switch (action.type) {
     case 'loginSuccess': {
       return {

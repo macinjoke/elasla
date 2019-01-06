@@ -1,4 +1,5 @@
-import { Action, Reducer } from 'redux'
+import { Reducer } from 'redux'
+import { Action } from './actions'
 
 export interface Source {
   type: string
@@ -22,7 +23,7 @@ const initialState: State = {
   sources: [],
 }
 
-const reducer: Reducer<State> = (state = initialState, action) => {
+const reducer: Reducer<State, Action> = (state = initialState, action) => {
   switch (action.type) {
     case 'updateText': {
       return { ...state, text: action.text }

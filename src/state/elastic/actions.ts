@@ -1,6 +1,7 @@
 import { AnyAction } from 'redux'
 import { Source } from './reducers'
 
+// TODO これいらんかも
 export interface UpdateTextAction {
   type: 'updateText'
   text: string

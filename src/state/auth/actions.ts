@@ -1,10 +1,11 @@
 import { Action as ReduxAction, AnyAction } from 'redux'
+import { User } from './reducers'
 
 export interface LoginSuccessAction {
   type: 'loginSuccess'
-  body: object
+  body: User
 }
-export const loginSuccess = (body: object): LoginSuccessAction => ({
+export const loginSuccess = (body: any): LoginSuccessAction => ({
   type: 'loginSuccess',
   body,
 })
