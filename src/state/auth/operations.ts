@@ -1,6 +1,6 @@
 import { Action } from 'redux'
 import { State, ThunkAction } from '../../types'
-import { loginSuccess, logoutState } from './actions'
+import { loginSuccess, loginFailure, logoutState } from './actions'
 
 export const login = (
   username: string,
@@ -12,7 +12,7 @@ export const login = (
     body: JSON.stringify({ username, password }),
   })
   if (response.status === 401) {
-    console.log('パスワードが違います (本当はレンダリングしたい)')
+    dispatch(loginFailure())
   }
   if (response.status !== 200) {
     console.log(await response.text())

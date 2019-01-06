@@ -36,6 +36,7 @@ class Auth extends React.Component<Props> {
   }
 
   public render() {
+    const { loginErrorMessage } = this.props
     return (
       <div>
         <h2>Auth</h2>
@@ -55,7 +56,7 @@ class Auth extends React.Component<Props> {
               </p>
             </li>
           </ul>
-          {/*{auth.error && <p>{auth.error}</p>}*/}
+          {loginErrorMessage && <p>{loginErrorMessage}</p>}
           <input type="submit" value="Send" />
         </form>
       </div>

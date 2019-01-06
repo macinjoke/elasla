@@ -18,3 +18,5 @@ export const searchSuccess = (sources: Source[]): SearchSuccessAction => ({
   type: 'searchSuccess',
   sources,
 })
+
+export type Action = UpdateTextAction | SearchSuccessAction
