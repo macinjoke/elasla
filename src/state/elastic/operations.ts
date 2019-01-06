@@ -5,7 +5,7 @@ import { ThunkAction } from '../../types'
 import { searchSuccess } from './actions'
 import { Source } from './reducers'
 
-export const search = (): ThunkAction => async (dispatch, getState) => {
+export const search = (text: string): ThunkAction => async dispatch => {
   const { host, port } = CONFIG.elasticsearch
   const client = new Client({
     host: `${host}:${port}`,
@@ -17,7 +17,7 @@ export const search = (): ThunkAction => async (dispatch, getState) => {
     body: {
       query: {
         match: {
-          text: getState().elastic.text,
+          text,
         },
       },
     },

@@ -9,8 +9,7 @@ import { Source, State as ElasticState } from '../state/elastic/reducers'
 import { State } from '../types'
 
 interface DispatchProps {
-  updateText: (text: string) => void
-  search: () => void
+  search: (text: string) => void
 }
 
 type StateProps = ElasticState
@@ -20,17 +19,12 @@ type Props = DispatchProps & ElasticState
 class Elastic extends React.Component<Props> {
   private url = `https://${CONFIG.slack.workspace}.slack.com`
   public render() {
-    const { text, sources } = this.props
+    const { sources } = this.props
     return (
       <div>
         <h2>Elastic</h2>
         <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            value={text}
-            onChange={this.handleChange}
-            placeholder="search text"
-          />
+          <input type="text" name="search" placeholder="search text" />
           <input type="submit" value="Submit" />
         </form>
         <div>
@@ -72,12 +66,7 @@ class Elastic extends React.Component<Props> {
 
   private handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    this.props.search()
-  }
-
-  private handleChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const { updateText } = this.props
-    updateText(e.currentTarget.value)
+    this.props.search(e.currentTarget.search.value)
   }
   private search = async (text: string) => {
     const { host, port } = CONFIG.elasticsearch
