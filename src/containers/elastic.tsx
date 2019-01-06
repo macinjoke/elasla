@@ -4,6 +4,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { CONFIG } from '../constants'
 import * as actions from '../state/elastic/actions'
+import * as thunkActions from '../state/elastic/operations'
 import { Source, State as ElasticState } from '../state/elastic/reducers'
 import { State } from '../state/store'
 
@@ -101,5 +102,5 @@ class Elastic extends React.Component<Props> {
 
 export default connect<StateProps, DispatchProps, {}, State>(
   s => s.elastic,
-  actions,
+  { ...actions, ...thunkActions },
 )(Elastic)
