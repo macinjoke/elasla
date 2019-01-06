@@ -2,7 +2,7 @@ import { AnyAction } from 'redux'
 import { Source } from './reducers'
 
 // TODO これいらんかも
-export const UPDATE_TEXT = 'UPDATE_TEXT'
+export const UPDATE_TEXT = 'elastic/UPDATE_TEXT'
 export interface UpdateTextAction {
   type: typeof UPDATE_TEXT
   text: string
@@ -12,7 +12,7 @@ export const updateText = (text: string): UpdateTextAction => ({
   text,
 })
 
-export const SEARCH_SUCCESS = 'SEARCH_SUCCESS'
+export const SEARCH_SUCCESS = 'elastic/SEARCH_SUCCESS'
 export interface SearchSuccessAction {
   type: typeof SEARCH_SUCCESS
   sources: Source[]
