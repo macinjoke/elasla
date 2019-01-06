@@ -1,5 +1,5 @@
 import { Reducer } from 'redux'
-import { Action } from './actions'
+import { Action, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_STATE } from './actions'
 
 export interface User {
   username: string
@@ -21,7 +21,7 @@ const initialState: State = {
 
 const reducer: Reducer<State, Action> = (state = initialState, action) => {
   switch (action.type) {
-    case 'loginSuccess': {
+    case LOGIN_SUCCESS: {
       return {
         ...state,
         isLogin: true,
@@ -29,10 +29,10 @@ const reducer: Reducer<State, Action> = (state = initialState, action) => {
         loginErrorMessage: '',
       }
     }
-    case 'loginFailure': {
+    case LOGIN_FAILURE: {
       return { ...state, loginErrorMessage: 'パスワードが違います' }
     }
-    case 'logoutState': {
+    case LOGOUT_STATE: {
       return { ...state, isLogin: false, user: null }
     }
     default: {

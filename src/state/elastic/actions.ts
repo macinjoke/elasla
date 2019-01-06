@@ -2,21 +2,23 @@ import { AnyAction } from 'redux'
 import { Source } from './reducers'
 
 // TODO これいらんかも
+export const UPDATE_TEXT = 'UPDATE_TEXT'
 export interface UpdateTextAction {
-  type: 'updateText'
+  type: typeof UPDATE_TEXT
   text: string
 }
 export const updateText = (text: string): UpdateTextAction => ({
-  type: 'updateText',
+  type: UPDATE_TEXT,
   text,
 })
 
+export const SEARCH_SUCCESS = 'SEARCH_SUCCESS'
 export interface SearchSuccessAction {
-  type: 'searchSuccess'
+  type: typeof SEARCH_SUCCESS
   sources: Source[]
 }
 export const searchSuccess = (sources: Source[]): SearchSuccessAction => ({
-  type: 'searchSuccess',
+  type: SEARCH_SUCCESS,
   sources,
 })
 

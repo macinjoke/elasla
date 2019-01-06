@@ -1,5 +1,5 @@
 import { Reducer } from 'redux'
-import { Action } from './actions'
+import { Action, SEARCH_SUCCESS, UPDATE_TEXT } from './actions'
 
 export interface Source {
   type: string
@@ -25,10 +25,10 @@ const initialState: State = {
 
 const reducer: Reducer<State, Action> = (state = initialState, action) => {
   switch (action.type) {
-    case 'updateText': {
+    case UPDATE_TEXT: {
       return { ...state, text: action.text }
     }
-    case 'searchSuccess': {
+    case SEARCH_SUCCESS: {
       return { ...state, sources: action.sources }
     }
     default: {
