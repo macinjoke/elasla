@@ -1,6 +1,6 @@
 import { Action, AnyAction } from 'redux'
 import { ThunkAction } from 'redux-thunk'
-import { State } from '../reducers'
+import { State } from '../store'
 
 export const login = (
   username: string,

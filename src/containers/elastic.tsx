@@ -2,10 +2,10 @@ import { Client, SearchResponse } from 'elasticsearch'
 import { Moment, unix } from 'moment'
 import React from 'react'
 import { connect } from 'react-redux'
-import * as actions from '../actions/elastic'
 import { CONFIG } from '../constants'
-import { State } from '../reducers'
-import { Source, State as ElasticState } from '../reducers/elastic'
+import * as actions from '../state/elastic/actions'
+import { Source, State as ElasticState } from '../state/elastic/reducers'
+import { State } from '../state/store'
 
 interface DispatchProps {
   updateText: (text: string) => void

@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { CONFIG } from './constants'
 import App from './containers/app'
-import configureStore from './store'
+import configureStore from './state/store'
 
 const element = document.getElementById('app')
 
