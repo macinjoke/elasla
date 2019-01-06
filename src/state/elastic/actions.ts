@@ -1,16 +1,20 @@
-import { Client, SearchResponse } from 'elasticsearch'
-import { Action, AnyAction } from 'redux'
-import { ThunkAction } from 'redux-thunk'
-import { CONFIG } from '../../constants'
-import { State } from '../store'
+import { AnyAction } from 'redux'
 import { Source } from './reducers'
 
-export const updateText = (text: string): AnyAction => ({
+export interface UpdateTextAction {
+  type: 'updateText'
+  text: string
+}
+export const updateText = (text: string): UpdateTextAction => ({
   type: 'updateText',
   text,
 })
 
-export const searchSuccess = (sources: object): AnyAction => ({
+export interface SearchSuccessAction {
+  type: 'searchSuccess'
+  sources: Source[]
+}
+export const searchSuccess = (sources: Source[]): SearchSuccessAction => ({
   type: 'searchSuccess',
   sources,
 })

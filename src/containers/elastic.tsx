@@ -6,7 +6,7 @@ import { CONFIG } from '../constants'
 import * as actions from '../state/elastic/actions'
 import * as thunkActions from '../state/elastic/operations'
 import { Source, State as ElasticState } from '../state/elastic/reducers'
-import { State } from '../state/store'
+import { State } from '../types'
 
 interface DispatchProps {
   updateText: (text: string) => void

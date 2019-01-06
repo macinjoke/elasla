@@ -1,8 +1,15 @@
-import { Action, AnyAction } from 'redux'
+import { Action as ReduxAction, AnyAction } from 'redux'
 
-export const loginSuccess = (body: object): AnyAction => ({
+export interface LoginSuccessAction {
+  type: 'loginSuccess'
+  body: object
+}
+export const loginSuccess = (body: object): LoginSuccessAction => ({
   type: 'loginSuccess',
   body,
 })
 
-export const logoutState = (): Action<string> => ({ type: 'logoutState' })
+export interface LogoutStateAction {
+  type: 'logoutState'
+}
+export const logoutState = (): LogoutStateAction => ({ type: 'logoutState' })

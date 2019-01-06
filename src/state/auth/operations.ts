@@ -1,12 +1,11 @@
 import { Action } from 'redux'
-import { ThunkAction } from 'redux-thunk'
-import { State } from '../store'
+import { State, ThunkAction } from '../../types'
 import { loginSuccess, logoutState } from './actions'
 
 export const login = (
   username: string,
   password: string,
-): ThunkAction<void, State, undefined, Action<string>> => async dispatch => {
+): ThunkAction => async dispatch => {
   const response = await fetch('http://localhost:3000/api/login', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
@@ -24,12 +23,7 @@ export const login = (
   dispatch(loginSuccess(body))
 }
 
-export const fetchLoginState = (): ThunkAction<
-  void,
-  State,
-  undefined,
-  Action<string>
-> => async dispatch => {
+export const fetchLoginState = (): ThunkAction => async dispatch => {
   const jwt = localStorage.getItem('jwt')
   if (!jwt) return
 
@@ -43,12 +37,7 @@ export const fetchLoginState = (): ThunkAction<
   dispatch(loginSuccess({ ...body, jwt }))
 }
 
-export const logout = (): ThunkAction<
-  void,
-  State,
-  undefined,
-  Action<string>
-> => dispatch => {
+export const logout = (): ThunkAction => dispatch => {
   localStorage.removeItem('jwt')
   dispatch(logoutState())
 }

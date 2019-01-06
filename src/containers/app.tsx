@@ -4,7 +4,7 @@ import { AnyAction, bindActionCreators } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import * as actions from '../state/auth/operations'
 import { State as AuthState } from '../state/auth/reducers'
-import { State } from '../state/store'
+import { State } from '../types'
 import Auth from './auth'
 import Elastic from './elastic'
 

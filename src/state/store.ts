@@ -1,13 +1,8 @@
 // @flow
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
-import authReducer, { State as AuthState } from './auth/reducers'
-import elasticReducer, { State as ElasticState } from './elastic/reducers'
-
-export interface State {
-  auth: AuthState
-  elastic: ElasticState
-}
+import authReducer from './auth/reducers'
+import elasticReducer from './elastic/reducers'
 
 const reducer = combineReducers({
   auth: authReducer,

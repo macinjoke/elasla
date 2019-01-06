@@ -2,7 +2,7 @@ import React, { FormEvent } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../state/auth/operations'
 import { State as AuthState } from '../state/auth/reducers'
-import { State } from '../state/store'
+import { State } from '../types'
 
 interface DispatchProps {
   login: (username: string, password: string) => void
