@@ -2,12 +2,11 @@ import React, { ChangeEvent } from 'react'
 import { connect } from 'react-redux'
 import { AnyAction, bindActionCreators } from 'redux'
 import { ThunkAction } from 'redux-thunk'
-import Header from '../components/header'
+import { Header } from '../components'
 import * as actions from '../state/auth/operations'
 import { State as AuthState } from '../state/auth/reducers'
 import { State } from '../types'
-import Auth from './auth'
-import Elastic from './elastic'
+import { Auth, Elastic } from './'
 
 interface DispatchProps {
   fetchLoginState: () => void
