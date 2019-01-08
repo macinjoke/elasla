@@ -9,34 +9,11 @@ interface Props {
 }
 
 class Auth extends React.Component<Props> {
-  public handleLocalAuthClick = async () => {
-    const data = {
-      username: 'test',
-      password: 'test',
-    }
-    const response = await fetch('http://localhost:3000/api/secure/local', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    })
-    console.log(response)
-    const text = await response.text()
-    console.log(text)
-  }
-
-  public fetchSomeData = async () => {
-    const response = await fetch('http://localhost:3000/api/some_data')
-    const data = await response.json()
-    console.log(response)
-    return data
-  }
-
   public render() {
     const { loginErrorMessage } = this.props
     return (
       <div>
         <h2>Auth</h2>
-        <button onClick={this.handleLocalAuthClick}>local auth request</button>
         <form onSubmit={this.handleSubmit}>
           <ul>
             <li>
