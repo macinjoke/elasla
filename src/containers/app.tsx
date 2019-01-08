@@ -1,21 +1,17 @@
 import React, { ChangeEvent } from 'react'
 import { connect } from 'react-redux'
-import { AnyAction, bindActionCreators } from 'redux'
-import { ThunkAction } from 'redux-thunk'
 import { Header } from '../containers'
 import * as actions from '../state/auth/operations'
-import { State as AuthState } from '../state/auth/reducers'
+import { User } from '../state/auth/reducers'
 import { State } from '../types'
 import { Auth, Elastic } from './'
 
-interface DispatchProps {
+interface Props {
   fetchLoginState: () => void
   logout: () => void
+  isLogin: boolean
+  user: User
 }
-
-type StateProps = AuthState
-
-type Props = DispatchProps & StateProps
 
 class App extends React.Component<Props> {
   public componentWillMount() {
@@ -42,14 +38,13 @@ class App extends React.Component<Props> {
   }
 }
 
-export default connect<StateProps, DispatchProps, {}, State>(
-  s => s.auth,
-  dispatch =>
-    bindActionCreators(
-      {
-        fetchLoginState: actions.fetchLoginState,
-        logout: actions.logout,
-      },
-      dispatch,
-    ),
+export default connect(
+  (s: State) => ({
+    isLogin: s.auth.isLogin,
+    user: s.auth.user,
+  }),
+  {
+    fetchLoginState: actions.fetchLoginState,
+    logout: actions.logout,
+  },
 )(App)

@@ -1,16 +1,12 @@
 import React, { FormEvent } from 'react'
 import { connect } from 'react-redux'
-import * as actions from '../state/auth/operations'
-import { State as AuthState } from '../state/auth/reducers'
+import * as operations from '../state/auth/operations'
 import { State } from '../types'
 
-interface DispatchProps {
+interface Props {
   login: (username: string, password: string) => void
+  loginErrorMessage: string
 }
-
-type StateProps = AuthState
-
-type Props = DispatchProps & AuthState
 
 class Auth extends React.Component<Props> {
   public handleLocalAuthClick = async () => {
@@ -72,7 +68,9 @@ class Auth extends React.Component<Props> {
   }
 }
 
-export default connect<StateProps, DispatchProps, {}, State>(
-  s => s.auth,
-  actions,
+export default connect(
+  (s: State) => ({
+    loginErrorMessage: s.auth.loginErrorMessage,
+  }),
+  { login: operations.login },
 )(Auth)
