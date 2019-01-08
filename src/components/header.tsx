@@ -25,7 +25,4 @@ class Header extends React.Component<Props> {
   }
 }
 
-export default connect<StateProps, DispatchProps, {}, State>(
-  s => s.auth,
-  { logout },
-)(Header)
+export default Header
