@@ -1,4 +1,4 @@
-import { ThunkAction as ThunkThunkAction } from 'redux-thunk'
+import { ThunkAction as _ThunkAction } from 'redux-thunk'
 import { Action as AuthAction } from '../state/auth/actions'
 import { State as AuthState } from '../state/auth/reducers'
 import { Action as ElasticAction } from '../state/elastic/actions'
@@ -11,7 +11,7 @@ export interface State {
 
 export type Action = AuthAction | ElasticAction
 
-export type ThunkAction<R = void, E = undefined> = ThunkThunkAction<
+export type ThunkAction<R = void, E = undefined> = _ThunkAction<
   R,
   State,
   E,
