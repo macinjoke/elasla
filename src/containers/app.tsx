@@ -27,7 +27,7 @@ class App extends React.Component<Props> {
     const { isLogin, user, logout } = this.props
     return (
       <div>
-        <Header logout={logout} isLogin={isLogin} />
+        <Header />
         {isLogin ? <Elastic /> : <Auth />}
         <h2>User Info</h2>
         {user && ( // デバッグ情報
