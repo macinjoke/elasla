@@ -1,5 +1,4 @@
 import React from 'react'
-import { logout } from '../state/auth/operations'
 import { State } from '../types'
 
 interface Props {
@@ -7,16 +6,14 @@ interface Props {
   logout: () => void
 }
 
-class Header extends React.Component<Props> {
-  public render() {
-    const { isLogin, logout } = this.props
-    return (
-      <div>
-        <h1>elasla</h1>
-        {isLogin && <button onClick={logout}>Logout</button>}
-      </div>
-    )
-  }
+const Header: React.FC<Props> = props => {
+  const { isLogin, logout } = props
+  return (
+    <div>
+      <h1>elasla</h1>
+      {isLogin && <button onClick={logout}>Logout</button>}
+    </div>
+  )
 }
 
 export default Header
