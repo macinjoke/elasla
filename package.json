@@ -11,6 +11,7 @@
     "lint": "tslint -c tslint.json -p tsconfig.json --fix"
   },
   "dependencies": {
+    "@material-ui/core": "^3.8.1",
     "elasticsearch": "^15.2.0",
     "moment": "^2.22.2",
     "react": "^16.6.3",

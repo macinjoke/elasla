@@ -1,3 +1,4 @@
+import CssBaseline from '@material-ui/core/CssBaseline'
 import React, { ChangeEvent } from 'react'
 import { connect } from 'react-redux'
 import { Header } from '../containers'
@@ -22,7 +23,8 @@ class App extends React.Component<Props> {
   public render() {
     const { isLogin, user, logout } = this.props
     return (
-      <div>
+      <>
+        <CssBaseline />
         <Header />
         {isLogin ? <Elastic /> : <Auth />}
         <h2>User Info</h2>
@@ -33,7 +35,7 @@ class App extends React.Component<Props> {
             <p>jwt: {user.jwt}</p>
           </div>
         )}
-      </div>
+      </>
     )
   }
 }
