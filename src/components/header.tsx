@@ -22,7 +22,7 @@ const styles = {
 const Header: React.FC<Props> = props => {
   const { isLogin, logout, classes } = props
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Toolbar>
         <h1 className={classes.title}>elasla</h1>
         {isLogin && (
