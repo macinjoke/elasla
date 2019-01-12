@@ -3,28 +3,24 @@ import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
 import React from 'react'
+import styled from 'styled-components'
 import { State } from '../types'
 
 interface Props {
   isLogin: boolean
   logout: () => void
-  classes: {
-    title: string
-  }
 }
 
-const styles = {
-  title: {
-    flexGrow: 1,
-  },
-}
+const Title = styled.h1`
+  flex-grow: 1;
+`
 
 const Header: React.FC<Props> = props => {
-  const { isLogin, logout, classes } = props
+  const { isLogin, logout } = props
   return (
     <AppBar position="sticky">
       <Toolbar>
-        <h1 className={classes.title}>elasla</h1>
+        <Title>elasla</Title>
         {isLogin && (
           <Button onClick={logout} color="inherit">
             Logout
@@ -35,4 +31,4 @@ const Header: React.FC<Props> = props => {
   )
 }
 
-export default withStyles(styles)(Header)
+export default Header
