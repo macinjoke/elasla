@@ -6,11 +6,12 @@ import { State } from '../types'
 interface Props {
   login: (username: string, password: string) => void
   loginErrorMessage: string
+  fetchLoginStateErrorMessage: string
 }
 
 class Auth extends React.Component<Props> {
   public render() {
-    const { loginErrorMessage } = this.props
+    const { loginErrorMessage, fetchLoginStateErrorMessage } = this.props
     return (
       <div>
         <h2>Auth</h2>
@@ -30,6 +31,7 @@ class Auth extends React.Component<Props> {
             </li>
           </ul>
           {loginErrorMessage && <p>{loginErrorMessage}</p>}
+          {fetchLoginStateErrorMessage && <p>{fetchLoginStateErrorMessage}</p>}
           <input type="submit" value="Send" />
         </form>
       </div>
@@ -48,6 +50,7 @@ class Auth extends React.Component<Props> {
 export default connect(
   (s: State) => ({
     loginErrorMessage: s.auth.loginErrorMessage,
+    fetchLoginStateErrorMessage: s.auth.fetchLoginStateErrorMessage,
   }),
   { login: operations.login },
 )(Auth)

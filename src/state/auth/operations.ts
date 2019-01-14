@@ -1,6 +1,11 @@
 import { Action } from 'redux'
 import { State, ThunkAction } from '../../types'
-import { loginFailure, loginSuccess, logoutState } from './actions'
+import {
+  fetchLoginStateFailure,
+  loginFailure,
+  loginSuccess,
+  logoutState,
+} from './actions'
 
 export const login = (
   username: string,
@@ -31,8 +36,9 @@ export const fetchLoginState = (): ThunkAction => async dispatch => {
     headers: { authorization: `Bearer ${jwt}` },
   })
   // localStorage.jwt が有効なものではなかった場合削除する
-  if (response.status === 400 || response.status === 401) {
+  if (response.status === 401) {
     localStorage.removeItem('jwt')
+    dispatch(fetchLoginStateFailure())
     return
   }
   if (response.status !== 200) return
