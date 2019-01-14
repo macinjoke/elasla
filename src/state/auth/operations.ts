@@ -37,7 +37,8 @@ export const fetchLoginState = (): ThunkAction => async dispatch => {
   }
   if (response.status !== 200) return
   const body = await response.json()
-  dispatch(loginSuccess({ ...body, jwt }))
+  console.log(body)
+  dispatch(loginSuccess(body))
 }
 
 export const logout = (): ThunkAction => dispatch => {

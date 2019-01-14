@@ -31,8 +31,6 @@ class App extends React.Component<Props> {
         {user && ( // デバッグ情報
           <div>
             <p>username: {user.username}</p>
-            <p>password: {user.password}</p>
-            <p>jwt: {user.jwt}</p>
           </div>
         )}
       </>

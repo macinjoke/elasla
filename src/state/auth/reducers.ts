@@ -3,8 +3,6 @@ import { Action, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_STATE } from './actions'
 
 export interface User {
   username: string
-  password: string
-  jwt: string
 }
 
 export interface State {
