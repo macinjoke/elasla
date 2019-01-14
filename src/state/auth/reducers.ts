@@ -25,27 +25,28 @@ const initialState: State = {
   isFetchLoginStateError: false,
 }
 
+const refreshError = (state: State): State => {
+  return { ...state, isLoginError: false, isFetchLoginStateError: false }
+}
+
 const reducer: Reducer<State, Action> = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS: {
       return {
-        ...state,
+        ...refreshError(state),
         isLogin: true,
         user: action.body,
         loginErrorMessage: '',
       }
     }
     case LOGIN_FAILURE: {
-      return { ...state, isLoginError: true }
+      return { ...refreshError(state), isLoginError: true }
     }
     case FETCH_LOGIN_STATE_FAILURE: {
-      return {
-        ...state,
-        isFetchLoginStateError: true,
-      }
+      return { ...refreshError(state), isFetchLoginStateError: true }
     }
     case LOGOUT_STATE: {
-      return { ...state, isLogin: false, user: null }
+      return { ...refreshError(state), isLogin: false, user: null }
     }
     default: {
       return state
