@@ -5,13 +5,13 @@ import { State } from '../types'
 
 interface Props {
   login: (username: string, password: string) => void
-  loginErrorMessage: string
-  fetchLoginStateErrorMessage: string
+  isLoginError: boolean
+  isFetchLoginStateError: boolean
 }
 
 class Auth extends React.Component<Props> {
   public render() {
-    const { loginErrorMessage, fetchLoginStateErrorMessage } = this.props
+    const { isLoginError, isFetchLoginStateError } = this.props
     return (
       <div>
         <h2>Auth</h2>
@@ -30,8 +30,10 @@ class Auth extends React.Component<Props> {
               </p>
             </li>
           </ul>
-          {loginErrorMessage && <p>{loginErrorMessage}</p>}
-          {fetchLoginStateErrorMessage && <p>{fetchLoginStateErrorMessage}</p>}
+          {isLoginError && <p>パスワードが違います</p>}
+          {isFetchLoginStateError && (
+            <p>セッションが切れました。もう一度ログインしてください。</p>
+          )}
           <input type="submit" value="Send" />
         </form>
       </div>
@@ -49,8 +51,8 @@ class Auth extends React.Component<Props> {
 
 export default connect(
   (s: State) => ({
-    loginErrorMessage: s.auth.loginErrorMessage,
-    fetchLoginStateErrorMessage: s.auth.fetchLoginStateErrorMessage,
+    isLoginError: s.auth.isLoginError,
+    isFetchLoginStateError: s.auth.isFetchLoginStateError,
   }),
   { login: operations.login },
 )(Auth)

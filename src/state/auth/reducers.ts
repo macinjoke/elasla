@@ -14,15 +14,15 @@ export interface User {
 export interface State {
   isLogin: boolean
   user: User
-  loginErrorMessage: string
-  fetchLoginStateErrorMessage: string
+  isLoginError: boolean
+  isFetchLoginStateError: boolean
 }
 
 const initialState: State = {
   isLogin: false,
   user: null,
-  loginErrorMessage: '',
-  fetchLoginStateErrorMessage: '',
+  isLoginError: false,
+  isFetchLoginStateError: false,
 }
 
 const reducer: Reducer<State, Action> = (state = initialState, action) => {
@@ -36,13 +36,12 @@ const reducer: Reducer<State, Action> = (state = initialState, action) => {
       }
     }
     case LOGIN_FAILURE: {
-      return { ...state, loginErrorMessage: 'パスワードが違います' }
+      return { ...state, isLoginError: true }
     }
     case FETCH_LOGIN_STATE_FAILURE: {
       return {
         ...state,
-        fetchLoginStateErrorMessage:
-          'セッションが切れました。もう一度ログインしてください。',
+        isFetchLoginStateError: true,
       }
     }
     case LOGOUT_STATE: {
