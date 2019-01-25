@@ -1,4 +1,3 @@
-import { Client, SearchResponse } from 'elasticsearch'
 import { unix } from 'moment'
 import React from 'react'
 import { connect } from 'react-redux'
@@ -63,25 +62,6 @@ class Elastic extends React.Component<Props> {
   private handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     this.props.search(e.currentTarget.search.value)
-  }
-  private search = async (text: string) => {
-    const { host, port } = CONFIG.elasticsearch
-    const client = new Client({
-      host: `${host}:${port}`,
-      log: 'trace',
-    })
-    const response: SearchResponse<Source> = await client.search({
-      index: 'slack-*',
-      type: 'slack-message',
-      body: {
-        query: {
-          match: {
-            text,
-          },
-        },
-      },
-    })
-    return response
   }
 }
 

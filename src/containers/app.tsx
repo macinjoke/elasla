@@ -10,7 +10,6 @@ import { Auth, Elastic } from './'
 
 interface Props {
   fetchLoginState: () => void
-  logout: () => void
   isLogin: boolean
   user: User
 }
@@ -22,7 +21,7 @@ class App extends React.Component<Props> {
   }
 
   public render() {
-    const { isLogin, user, logout } = this.props
+    const { isLogin, user } = this.props
     return (
       <>
         <CssBaseline />
@@ -47,6 +46,5 @@ export default connect(
   }),
   {
     fetchLoginState: actions.fetchLoginState,
-    logout: actions.logout,
   },
 )(App)
