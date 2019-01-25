@@ -2,6 +2,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import React from 'react'
 import { connect } from 'react-redux'
 import { Header } from '../containers'
+import SignUpDialog from '../containers/signUpDialog'
 import * as actions from '../state/auth/operations'
 import { User } from '../state/auth/reducers'
 import { State } from '../types'
@@ -33,6 +34,7 @@ class App extends React.Component<Props> {
             <p>username: {user.username}</p>
           </div>
         )}
+        <SignUpDialog />
       </>
     )
   }

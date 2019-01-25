@@ -2,11 +2,13 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import authReducer from './auth/reducers'
+import dialogReducer from './dialog/reducers'
 import elasticReducer from './elastic/reducers'
 
 const reducer = combineReducers({
   auth: authReducer,
   elastic: elasticReducer,
+  dialog: dialogReducer,
 })
 
 const composeEnhancers =
