@@ -1,4 +1,3 @@
-import { Action as ReduxAction, AnyAction } from 'redux'
 import { User } from './reducers'
 
 export const LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS'

@@ -1,5 +1,4 @@
 import { Client, SearchResponse } from 'elasticsearch'
-import { Action } from 'redux'
 import { CONFIG } from '../../constants'
 import { ThunkAction } from '../../types'
 import { searchSuccess } from './actions'

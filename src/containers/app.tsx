@@ -1,5 +1,5 @@
 import CssBaseline from '@material-ui/core/CssBaseline'
-import React, { ChangeEvent } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Header } from '../containers'
 import * as actions from '../state/auth/operations'

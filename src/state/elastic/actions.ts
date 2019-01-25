@@ -1,4 +1,3 @@
-import { AnyAction } from 'redux'
 import { Source } from './reducers'
 
 export const SEARCH_SUCCESS = 'elastic/SEARCH_SUCCESS'

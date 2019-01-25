@@ -1,5 +1,4 @@
-import { Action } from 'redux'
-import { State, ThunkAction } from '../../types'
+import { ThunkAction } from '../../types'
 import {
   fetchLoginStateFailure,
   loginFailure,
