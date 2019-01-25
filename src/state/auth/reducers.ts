@@ -36,7 +36,6 @@ const reducer: Reducer<State, Action> = (state = initialState, action) => {
         ...refreshError(state),
         isLogin: true,
         user: action.body,
-        loginErrorMessage: '',
       }
     }
     case LOGIN_FAILURE: {
