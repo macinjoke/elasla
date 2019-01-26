@@ -21,11 +21,15 @@ const StyledButton = styled(Button)`
   margin-top: 1rem;
 ` as React.ComponentType<ButtonProps>
 
+const Div = styled.div`
+  padding: 10px;
+`
+
 class Auth extends React.Component<Props> {
   public render() {
     const { isLoginError, isFetchLoginStateError } = this.props
     return (
-      <div>
+      <Div>
         <h2>Auth</h2>
         <form onSubmit={this.handleSubmit}>
           <StyledTextField
@@ -48,7 +52,7 @@ class Auth extends React.Component<Props> {
             Login
           </StyledButton>
         </form>
-      </div>
+      </Div>
     )
   }
 
