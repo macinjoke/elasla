@@ -1,4 +1,4 @@
-import Button from '@material-ui/core/Button'
+import Button, {ButtonProps} from '@material-ui/core/Button'
 import TextField, { TextFieldProps } from '@material-ui/core/TextField'
 import React, { FormEvent } from 'react'
 import { connect } from 'react-redux'
@@ -16,6 +16,10 @@ const StyledTextField = styled(TextField)`
   display: flex;
   width: 15rem;
 ` as React.ComponentType<TextFieldProps>
+
+const StyledButton = styled(Button)`
+  margin-top: 1rem;
+` as React.ComponentType<ButtonProps>
 
 class Auth extends React.Component<Props> {
   public render() {
@@ -40,9 +44,9 @@ class Auth extends React.Component<Props> {
           {isFetchLoginStateError && (
             <p>セッションが切れました。もう一度ログインしてください。</p>
           )}
-          <Button variant="contained" type="submit">
+          <StyledButton variant="contained" type="submit">
             Login
-          </Button>
+          </StyledButton>
         </form>
       </div>
     )
