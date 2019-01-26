@@ -1,4 +1,4 @@
-import Button, {ButtonProps} from '@material-ui/core/Button'
+import Button, { ButtonProps } from '@material-ui/core/Button'
 import TextField, { TextFieldProps } from '@material-ui/core/TextField'
 import React, { FormEvent } from 'react'
 import { connect } from 'react-redux'

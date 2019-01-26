@@ -1,15 +1,12 @@
 import CssBaseline from '@material-ui/core/CssBaseline'
 import React from 'react'
 import { connect } from 'react-redux'
-import { Header } from '../containers'
 import SignUpDialog from '../containers/signUpDialog'
 import * as actions from '../state/auth/operations'
-import { State } from '../types'
-import { Auth, Elastic } from './'
+import { Content, Header } from './'
 
 interface Props {
   fetchLoginState: () => void
-  isLogin: boolean
 }
 
 class App extends React.Component<Props> {
@@ -19,12 +16,11 @@ class App extends React.Component<Props> {
   }
 
   public render() {
-    const { isLogin } = this.props
     return (
       <>
         <CssBaseline />
         <Header />
-        {isLogin ? <Elastic /> : <Auth />}
+        <Content />
         <SignUpDialog />
       </>
     )
@@ -32,9 +28,7 @@ class App extends React.Component<Props> {
 }
 
 export default connect(
-  (s: State) => ({
-    isLogin: s.auth.isLogin,
-  }),
+  null,
   {
     fetchLoginState: actions.fetchLoginState,
   },
