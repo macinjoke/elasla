@@ -25,12 +25,12 @@ const Div = styled.div`
   padding: 10px;
 `
 
-class Auth extends React.Component<Props> {
+class LoginForm extends React.Component<Props> {
   public render() {
     const { isLoginError, isFetchLoginStateError } = this.props
     return (
       <Div>
-        <h2>Auth</h2>
+        <h2>Login</h2>
         <form onSubmit={this.handleSubmit}>
           <StyledTextField
             autoFocus
@@ -71,4 +71,4 @@ export default connect(
     isFetchLoginStateError: s.auth.isFetchLoginStateError,
   }),
   { login: operations.login },
-)(Auth)
+)(LoginForm)
