@@ -1,56 +1,62 @@
-import { Reducer } from 'redux'
-import {
-  Action,
-  FETCH_LOGIN_STATE_FAILURE,
-  LOGIN_FAILURE,
-  LOGIN_SUCCESS,
-  LOGOUT_STATE,
-} from './actions'
+import { reducerWithInitialState } from 'typescript-fsa-reducers'
+import { logout } from './actions'
+import { fetchSession, login } from './operations'
 
 export interface User {
   username: string
+  password: string
+  jwt: string
 }
 
 export interface State {
   isLogin: boolean
   user: User
-  isLoginError: boolean
-  isFetchLoginStateError: boolean
+  loginError: Error
+  fetchSessionError: Error
 }
 
 const initialState: State = {
   isLogin: false,
   user: null,
-  isLoginError: false,
-  isFetchLoginStateError: false,
+  loginError: null,
+  fetchSessionError: null,
 }
 
 const refreshError = (state: State): State => {
-  return { ...state, isLoginError: false, isFetchLoginStateError: false }
+  return { ...state, loginError: null, fetchSessionError: null }
 }
 
-const reducer: Reducer<State, Action> = (state = initialState, action) => {
-  switch (action.type) {
-    case LOGIN_SUCCESS: {
-      return {
-        ...refreshError(state),
-        isLogin: true,
-        user: action.body,
-      }
+const reducer = reducerWithInitialState(initialState)
+  .case(logout, state => ({
+    ...refreshError(state),
+    isLogin: false,
+    user: null,
+  }))
+  .case(login.async.failed, (state, { error }) => {
+    return {
+      ...refreshError(state),
+      isLogin: false,
+      loginError: error,
     }
-    case LOGIN_FAILURE: {
-      return { ...refreshError(state), isLoginError: true }
-    }
-    case FETCH_LOGIN_STATE_FAILURE: {
-      return { ...refreshError(state), isFetchLoginStateError: true }
-    }
-    case LOGOUT_STATE: {
-      return { ...refreshError(state), isLogin: false, user: null }
-    }
-    default: {
+  })
+  .case(login.async.done, (state, { result: user }) => ({
+    ...state,
+    isLogin: true,
+    user,
+  }))
+  .case(fetchSession.async.done, (state, { result: user }) => ({
+    ...state,
+    isLogin: true,
+    user,
+  }))
+  .case(fetchSession.async.failed, (state, { error }) => {
+    if (error.message === 'jwt does not exist') {
       return state
     }
-  }
-}
+    return {
+      ...refreshError(state),
+      fetchSessionError: error,
+    }
+  })
 
 export default reducer

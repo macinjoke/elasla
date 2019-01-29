@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { Header } from '../components'
-import { logout } from '../state/auth/operations'
+import { logout } from '../state/auth/actions'
 import { openSignUpDialog } from '../state/dialog/actions'
 import { State } from '../types'
 

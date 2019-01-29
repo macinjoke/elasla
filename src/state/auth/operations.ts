@@ -1,52 +1,38 @@
-import { ThunkAction } from '../../types'
-import {
-  fetchLoginStateFailure,
-  loginFailure,
-  loginSuccess,
-  logoutState,
-} from './actions'
+import actionCreatorFactory from 'typescript-fsa'
+import { asyncFactory } from 'typescript-fsa-redux-thunk'
+import { State, User } from './reducers'
 
-export const login = (
-  username: string,
-  password: string,
-): ThunkAction => async dispatch => {
-  const response = await fetch('http://localhost:3000/api/login', {
+const create = actionCreatorFactory('auth')
+const createAsync = asyncFactory<State>(create)
+
+interface LoginPrams {
+  username: string
+  password: string
+}
+
+export const login = createAsync<LoginPrams, User>('Login', async params => {
+  const res = await fetch('http://localhost:3000/api/login', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify(params),
   })
-  if (response.status === 401) {
-    dispatch(loginFailure())
+  if (!res.ok) {
+    throw new Error(`${res.status}: ${res.statusText}`)
   }
-  if (response.status !== 200) {
-    console.log(await response.text())
-    return
-  }
-  const body = await response.json()
-  localStorage.setItem('jwt', body.jwt)
-  dispatch(loginSuccess(body))
-}
+  return res.json()
+})
 
-export const fetchLoginState = (): ThunkAction => async dispatch => {
+export const fetchSession = createAsync<{}, User>('FetchSession', async () => {
   const jwt = localStorage.getItem('jwt')
-  if (!jwt) return
-
-  const response = await fetch('http://localhost:3000/api/login', {
+  if (!jwt) {
+    throw new Error(`jwt does not exist`)
+  }
+  const res = await fetch('http://localhost:3000/api/login', {
     headers: { authorization: `Bearer ${jwt}` },
   })
-  // localStorage.jwt が有効なものではなかった場合削除する
-  if (response.status === 401) {
+  if (!res.ok) {
     localStorage.removeItem('jwt')
-    dispatch(fetchLoginStateFailure())
-    return
+    throw new Error(`${res.status}: ${res.statusText}`)
   }
-  if (response.status !== 200) return
-  const body = await response.json()
-  console.log(body)
-  dispatch(loginSuccess(body))
-}
-
-export const logout = (): ThunkAction => dispatch => {
-  localStorage.removeItem('jwt')
-  dispatch(logoutState())
-}
+  return res.json()
+})

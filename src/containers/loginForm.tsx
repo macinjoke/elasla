@@ -4,12 +4,13 @@ import React, { FormEvent } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import * as operations from '../state/auth/operations'
+import { User } from '../state/auth/reducers'
 import { State } from '../types'
 
 interface Props {
-  login: (username: string, password: string) => void
-  isLoginError: boolean
-  isFetchLoginStateError: boolean
+  login: (loginParams: { username: string; password: string }) => Promise<User>
+  loginError: Error
+  fetchSessionError: Error
 }
 
 const StyledTextField = styled(TextField)`
@@ -27,7 +28,7 @@ const Div = styled.div`
 
 class LoginForm extends React.Component<Props> {
   public render() {
-    const { isLoginError, isFetchLoginStateError } = this.props
+    const { fetchSessionError, loginError } = this.props
     return (
       <Div>
         <h2>Login</h2>
@@ -44,8 +45,8 @@ class LoginForm extends React.Component<Props> {
             margin="dense"
             type="password"
           />
-          {isLoginError && <p>パスワードが違います</p>}
-          {isFetchLoginStateError && (
+          {loginError && <p>パスワードが違います</p>}
+          {fetchSessionError && (
             <p>セッションが切れました。もう一度ログインしてください。</p>
           )}
           <StyledButton variant="contained" type="submit">
@@ -56,19 +57,22 @@ class LoginForm extends React.Component<Props> {
     )
   }
 
-  private handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    console.log('submit')
+  private handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const { login } = this.props
     const target = e.currentTarget
-    login(target.username.value, target.password.value)
+    const res = await login({
+      username: target.username.value,
+      password: target.password.value,
+    })
+    localStorage.setItem('jwt', res.jwt)
   }
 }
 
 export default connect(
   (s: State) => ({
-    isLoginError: s.auth.isLoginError,
-    isFetchLoginStateError: s.auth.isFetchLoginStateError,
+    fetchSessionError: s.auth.fetchSessionError,
+    loginError: s.auth.loginError,
   }),
-  { login: operations.login },
+  { login: operations.login.action },
 )(LoginForm)

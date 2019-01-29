@@ -1,39 +1,5 @@
-import { User } from './reducers'
+import actionCreatorFactory from 'typescript-fsa'
 
-export const LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS'
-export interface LoginSuccessAction {
-  type: typeof LOGIN_SUCCESS
-  body: User
-}
-export const loginSuccess = (body: any): LoginSuccessAction => ({
-  type: LOGIN_SUCCESS,
-  body,
-})
+const actionCreator = actionCreatorFactory('auth')
 
-export const LOGIN_FAILURE = 'auth/LOGIN_FAILURE'
-export interface LoginFailureAction {
-  type: typeof LOGIN_FAILURE
-}
-export const loginFailure = (): LoginFailureAction => ({
-  type: LOGIN_FAILURE,
-})
-
-export const FETCH_LOGIN_STATE_FAILURE = 'auth/FETCH_LOGIN_STATE_FAILURE'
-export interface FetchLoginStateFailureAction {
-  type: typeof FETCH_LOGIN_STATE_FAILURE
-}
-export const fetchLoginStateFailure = (): FetchLoginStateFailureAction => ({
-  type: FETCH_LOGIN_STATE_FAILURE,
-})
-
-export const LOGOUT_STATE = 'auth/LOGOUT_STATE'
-export interface LogoutStateAction {
-  type: typeof LOGOUT_STATE
-}
-export const logoutState = (): LogoutStateAction => ({ type: LOGOUT_STATE })
-
-export type Action =
-  | LoginSuccessAction
-  | LoginFailureAction
-  | LogoutStateAction
-  | FetchLoginStateFailureAction
+export const logout = actionCreator('LOGOUT')

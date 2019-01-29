@@ -13,7 +13,7 @@ const reducer = combineReducers({
 
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
   ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-      serializeState: true, // TODO なぜか働かない( Error オブジェクトが表示されない)
+      serialize: true,
     })
   : compose
 

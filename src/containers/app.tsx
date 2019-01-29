@@ -6,13 +6,13 @@ import * as actions from '../state/auth/operations'
 import { Content, Header } from './'
 
 interface Props {
-  fetchLoginState: () => void
+  fetchSession: () => Promise<{ username: string }>
 }
 
 class App extends React.Component<Props> {
-  public componentWillMount() {
-    const { fetchLoginState } = this.props
-    fetchLoginState()
+  public async componentWillMount() {
+    const { fetchSession } = this.props
+    await fetchSession()
   }
 
   public render() {
@@ -30,6 +30,6 @@ class App extends React.Component<Props> {
 export default connect(
   null,
   {
-    fetchLoginState: actions.fetchLoginState,
+    fetchSession: actions.fetchSession.action,
   },
 )(App)

@@ -16,13 +16,13 @@ const Title = styled.h1`
 
 class Header extends React.Component<Props> {
   public render() {
-    const { isLogin, logout, openSignUpDialog } = this.props
+    const { isLogin, openSignUpDialog } = this.props
     return (
       <AppBar position="sticky">
         <Toolbar>
           <Title>elasla</Title>
           {isLogin ? (
-            <Button onClick={logout} color="inherit">
+            <Button onClick={this.handleClick} color="inherit">
               Logout
             </Button>
           ) : (
@@ -33,6 +33,11 @@ class Header extends React.Component<Props> {
         </Toolbar>
       </AppBar>
     )
+  }
+  private handleClick = () => {
+    const { logout } = this.props
+    logout()
+    localStorage.removeItem('jwt')
   }
 }
 
