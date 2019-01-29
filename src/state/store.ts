@@ -11,8 +11,11 @@ const reducer = combineReducers({
   dialog: dialogReducer,
 })
 
-const composeEnhancers =
-  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+      serializeState: true, // TODO なぜか働かない( Error オブジェクトが表示されない)
+    })
+  : compose
 
 export default function configureStore() {
   return createStore(reducer, composeEnhancers(applyMiddleware(thunk)))
