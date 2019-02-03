@@ -2,7 +2,7 @@
 
 WIP
 
-Slack のログデータを Elasticsearch にいれて見れるようにするプロジェクトのフロント。
+Slack のメッセージログデータを Elasticsearch にいれてWeb から検索できるようにする。
 
 バックエンド: https://github.com/macinjoke/elasla-backend
 
