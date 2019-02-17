@@ -2,8 +2,8 @@ import actionCreatorFactory from 'typescript-fsa'
 import { asyncFactory } from 'typescript-fsa-redux-thunk'
 import { State, User } from './reducers'
 
-const create = actionCreatorFactory('auth')
-const createAsync = asyncFactory<State>(create)
+const actionCreator = actionCreatorFactory('auth')
+const createAsync = asyncFactory<State>(actionCreator)
 
 interface LoginPrams {
   username: string

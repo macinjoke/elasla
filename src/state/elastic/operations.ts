@@ -5,8 +5,8 @@ import { Source, State } from './reducers'
 import { actionCreatorFactory } from 'typescript-fsa'
 import { asyncFactory } from 'typescript-fsa-redux-thunk'
 
-const create = actionCreatorFactory('elastic')
-const createAsync = asyncFactory<State>(create)
+const actionCreator = actionCreatorFactory('elastic')
+const createAsync = asyncFactory<State>(actionCreator)
 
 const { host, port } = CONFIG.elasticsearch
 const client = new Client({
