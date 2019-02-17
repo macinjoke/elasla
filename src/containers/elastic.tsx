@@ -69,5 +69,5 @@ export default connect(
   (s: State) => ({
     sources: s.elastic.sources,
   }),
-  { search: operations.search },
+  { search: operations.search.action },
 )(Elastic)

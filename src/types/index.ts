@@ -3,7 +3,7 @@ import { ThunkAction as _ThunkAction } from 'redux-thunk'
 import { State as AuthState } from '../state/auth/reducers'
 import { Action as DialogAction } from '../state/dialog/actions'
 import { State as DialogState } from '../state/dialog/reducers'
-import { Action as ElasticAction } from '../state/elastic/actions'
+// import { Action as ElasticAction } from '../state/elastic/actions'
 import { State as ElasticState } from '../state/elastic/reducers'
 
 export interface State {
@@ -12,7 +12,7 @@ export interface State {
   dialog: DialogState
 }
 
-export type Action = ElasticAction | DialogAction
+export type Action = DialogAction
 
 export type ThunkAction<R = void, E = undefined> = _ThunkAction<
   R,

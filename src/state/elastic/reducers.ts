@@ -1,5 +1,5 @@
-import { Reducer } from 'redux'
-import { Action, SEARCH_SUCCESS } from './actions'
+import { reducerWithInitialState } from 'typescript-fsa-reducers'
+import { search } from './operations'
 
 export interface Source {
   type: string
@@ -21,15 +21,12 @@ const initialState: State = {
   sources: [],
 }
 
-const reducer: Reducer<State, Action> = (state = initialState, action) => {
-  switch (action.type) {
-    case SEARCH_SUCCESS: {
-      return { ...state, sources: action.sources }
-    }
-    default: {
-      return state
-    }
-  }
-}
+const reducer = reducerWithInitialState(initialState).case(
+  search.async.done,
+  (state, { result: response }) => ({
+    ...state,
+    sources: response.hits.hits.map((hit: any) => hit._source),
+  }),
+)
 
 export default reducer

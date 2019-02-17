@@ -1,26 +1,33 @@
 import { Client, SearchResponse } from 'elasticsearch'
 import { CONFIG } from '../../constants'
-import { ThunkAction } from '../../types'
-import { searchSuccess } from './actions'
-import { Source } from './reducers'
+import { Source, State } from './reducers'
 
-export const search = (text: string): ThunkAction => async dispatch => {
-  const { host, port } = CONFIG.elasticsearch
-  const client = new Client({
-    host: `${host}:${port}`,
-    log: 'trace',
-  })
-  const response: SearchResponse<Source> = await client.search({
-    index: 'slack-*',
-    type: 'slack-message',
-    body: {
-      query: {
-        match: {
-          text,
+import { actionCreatorFactory } from 'typescript-fsa'
+import { asyncFactory } from 'typescript-fsa-redux-thunk'
+
+const create = actionCreatorFactory('elastic')
+const createAsync = asyncFactory<State>(create)
+
+const { host, port } = CONFIG.elasticsearch
+const client = new Client({
+  host: `${host}:${port}`,
+  log: 'trace',
+})
+
+export const search = createAsync<string, SearchResponse<Source>>(
+  'Search',
+  async text => {
+    const res: SearchResponse<Source> = await client.search({
+      index: 'slack-*',
+      type: 'slack-message',
+      body: {
+        query: {
+          match: {
+            text,
+          },
         },
       },
-    },
-  })
-  const sources = response.hits.hits.map((hit: any) => hit._source)
-  dispatch(searchSuccess(sources))
-}
+    })
+    return res
+  },
+)
