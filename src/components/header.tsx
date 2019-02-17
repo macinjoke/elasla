@@ -16,17 +16,17 @@ const Title = styled.h1`
 
 class Header extends React.Component<Props> {
   public render() {
-    const { isLogin, openSignUpDialog } = this.props
+    const { isLogin } = this.props
     return (
       <AppBar position="sticky">
         <Toolbar>
           <Title>elasla</Title>
           {isLogin ? (
-            <Button onClick={this.handleClick} color="inherit">
+            <Button onClick={this.handleLogout} color="inherit">
               Logout
             </Button>
           ) : (
-            <Button color="inherit" onClick={openSignUpDialog}>
+            <Button color="inherit" onClick={this.handleSignUpButton}>
               新規登録
             </Button>
           )}
@@ -34,10 +34,14 @@ class Header extends React.Component<Props> {
       </AppBar>
     )
   }
-  private handleClick = () => {
+  private handleLogout = () => {
     const { logout } = this.props
     logout()
     localStorage.removeItem('jwt')
+  }
+  private handleSignUpButton = () => {
+    const { openSignUpDialog } = this.props
+    openSignUpDialog()
   }
 }
 

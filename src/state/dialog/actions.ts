@@ -1,17 +1,6 @@
-export const OPEN_SIGNUP_DIALOG = 'dialog/OPEN_SIGNUP_DIALOG'
-export interface OpenSignUpDialog {
-  type: typeof OPEN_SIGNUP_DIALOG
-}
-export const openSignUpDialog = (): OpenSignUpDialog => ({
-  type: OPEN_SIGNUP_DIALOG,
-})
+import actionCreatorFactory from 'typescript-fsa'
 
-export const CLOSE_SIGNUP_DIALOG = 'dialog/CLOSE_SIGNUP_DIALOG'
-export interface CloseSignUpDialog {
-  type: typeof CLOSE_SIGNUP_DIALOG
-}
-export const closeSignUpDialog = (): CloseSignUpDialog => ({
-  type: CLOSE_SIGNUP_DIALOG,
-})
+const actionCreator = actionCreatorFactory('dialog')
 
-export type Action = OpenSignUpDialog | CloseSignUpDialog
+export const openSignUpDialog = actionCreator('OPEN_SIGNUP_DIALOG')
+export const closeSignUpDialog = actionCreator('CLOSE_SIGNUP_DIALOG')

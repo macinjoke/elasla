@@ -38,10 +38,10 @@ class SignUpDialog extends React.Component<Props, State> {
   }
 
   public render() {
-    const { signUpDialog, closeSignUpDialog } = this.props
+    const { signUpDialog } = this.props
     return (
-      <Dialog open={signUpDialog} onClose={closeSignUpDialog}>
-        <form onSubmit={this.handleBackButton}>
+      <Dialog open={signUpDialog} onClose={this.handleClose}>
+        <form onSubmit={this.handleSubmit}>
           <DialogTitle>新規登録</DialogTitle>
           <DialogContent>
             <DialogContentText>
@@ -60,7 +60,7 @@ class SignUpDialog extends React.Component<Props, State> {
             <TextField name="password" label="Password" fullWidth />
           </DialogContent>
           <DialogActions>
-            <Button color="primary" onClick={closeSignUpDialog}>
+            <Button color="primary" onClick={this.handleClose}>
               戻る
             </Button>
             <Button color="primary" type="submit">
@@ -75,12 +75,18 @@ class SignUpDialog extends React.Component<Props, State> {
   private handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState({ count: e.currentTarget.value.length })
   }
-  private handleBackButton = (e: FormEvent<HTMLFormElement>) => {
+
+  private handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     console.log(e)
     const target = e.currentTarget
     console.log(target.email.value)
     console.log(target.password.value)
+  }
+
+  private handleClose = () => {
+    const { closeSignUpDialog } = this.props
+    closeSignUpDialog()
   }
 }
 
