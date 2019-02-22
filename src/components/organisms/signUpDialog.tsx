@@ -8,8 +8,8 @@ import TextField, { TextFieldProps } from '@material-ui/core/TextField'
 import React, { ChangeEvent, ComponentType, FormEvent } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import * as actions from '../state/dialog/actions'
-import { State as _State } from '../types'
+import * as actions from '../../state/dialog/actions'
+import { State as _State } from '../../types'
 
 interface Props {
   signUpDialog: boolean

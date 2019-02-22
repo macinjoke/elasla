@@ -1,9 +1,10 @@
 import CssBaseline from '@material-ui/core/CssBaseline'
 import React from 'react'
 import { connect } from 'react-redux'
-import SignUpDialog from '../containers/signUpDialog'
 import * as actions from '../state/auth/operations'
-import { Content, Header } from './'
+import Content from './organisms/content'
+import Header from './organisms/header'
+import SignUpDialog from './organisms/signUpDialog'
 
 interface Props {
   fetchSession: () => Promise<{ username: string }>

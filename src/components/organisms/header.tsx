@@ -4,9 +4,9 @@ import Toolbar from '@material-ui/core/Toolbar'
 import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { logout } from '../state/auth/actions'
-import { openSignUpDialog } from '../state/dialog/actions'
-import { State } from '../types'
+import { logout as _logout } from '../../state/auth/actions'
+import { openSignUpDialog as _openSignUpDialog } from '../../state/dialog/actions'
+import { State } from '../../types'
 
 interface Props {
   isLogin: boolean
@@ -53,5 +53,5 @@ export default connect(
   (s: State) => ({
     isLogin: s.auth.isLogin,
   }),
-  { logout, openSignUpDialog },
+  { logout: _logout, openSignUpDialog: _openSignUpDialog },
 )(Header)

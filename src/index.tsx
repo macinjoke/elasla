@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import App from './containers/app'
+import App from './components/app'
 import configureStore from './state/store'
 
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles'
