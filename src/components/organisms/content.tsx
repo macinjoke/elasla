@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { State } from '../../types'
 import Elastic from './contents/elastic'
-import LoginForm from './contents/loginForm'
+import Login from './contents/login'
 
 interface Props {
   isLogin: boolean
@@ -17,7 +17,7 @@ const Div = styled.div`
 class Content extends React.Component<Props> {
   public render() {
     const { isLogin } = this.props
-    return <Div>{isLogin ? <Elastic /> : <LoginForm />}</Div>
+    return <Div>{isLogin ? <Elastic /> : <Login />}</Div>
   }
 }
 

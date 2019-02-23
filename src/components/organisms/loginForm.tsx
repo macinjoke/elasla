@@ -3,9 +3,9 @@ import TextField, { TextFieldProps } from '@material-ui/core/TextField'
 import React, { FormEvent } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import * as operations from '../../../state/auth/operations'
-import { User } from '../../../state/auth/reducers'
-import { State } from '../../../types'
+import * as operations from '../../state/auth/operations'
+import { User } from '../../state/auth/reducers'
+import { State } from '../../types'
 
 interface Props {
   login: (loginParams: { username: string; password: string }) => Promise<User>
@@ -22,38 +22,31 @@ const StyledButton = styled(Button)`
   margin-top: 1rem;
 ` as React.ComponentType<ButtonProps>
 
-const Div = styled.div`
-  padding: 10px;
-`
-
 class LoginForm extends React.Component<Props> {
   public render() {
     const { fetchSessionError, loginError } = this.props
     return (
-      <Div>
-        <h2>Login</h2>
-        <form onSubmit={this.handleSubmit}>
-          <StyledTextField
-            autoFocus
-            id="username"
-            label="Username"
-            margin="dense"
-          />
-          <StyledTextField
-            id="password"
-            label="Password"
-            margin="dense"
-            type="password"
-          />
-          {loginError && <p>パスワードが違います</p>}
-          {fetchSessionError && (
-            <p>セッションが切れました。もう一度ログインしてください。</p>
-          )}
-          <StyledButton variant="contained" type="submit">
-            Login
-          </StyledButton>
-        </form>
-      </Div>
+      <form onSubmit={this.handleSubmit}>
+        <StyledTextField
+          autoFocus
+          id="username"
+          label="Username"
+          margin="dense"
+        />
+        <StyledTextField
+          id="password"
+          label="Password"
+          margin="dense"
+          type="password"
+        />
+        {loginError && <p>パスワードが違います</p>}
+        {fetchSessionError && (
+          <p>セッションが切れました。もう一度ログインしてください。</p>
+        )}
+        <StyledButton variant="contained" type="submit">
+          Login
+        </StyledButton>
+      </form>
     )
   }
 
