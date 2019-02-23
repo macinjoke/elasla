@@ -1,8 +1,8 @@
 import Typography from '@material-ui/core/Typography'
 import React from 'react'
 import { connect } from 'react-redux'
-import * as operations from '../../../state/elastic/operations'
-import SearchResultList from '../searchResultList'
+import * as operations from '../../state/elastic/operations'
+import SearchResultList from '../organisms/searchResultList'
 
 interface Props {
   search: (text: string) => void

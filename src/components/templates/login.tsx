@@ -1,7 +1,7 @@
 import Typography from '@material-ui/core/Typography'
 import React from 'react'
 import styled from 'styled-components'
-import LoginForm from '../loginForm'
+import LoginForm from '../organisms/loginForm'
 
 const Div = styled.div`
   padding: 10px;
