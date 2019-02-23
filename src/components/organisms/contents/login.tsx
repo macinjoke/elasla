@@ -1,3 +1,4 @@
+import Typography from '@material-ui/core/Typography'
 import React from 'react'
 import styled from 'styled-components'
 import LoginForm from '../loginForm'
@@ -10,7 +11,7 @@ class Login extends React.Component<{}> {
   public render() {
     return (
       <Div>
-        <h2>Login</h2>
+        <Typography variant="h3">Login</Typography>
         <LoginForm />
       </Div>
     )

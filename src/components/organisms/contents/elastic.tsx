@@ -1,3 +1,4 @@
+import Typography from '@material-ui/core/Typography'
 import React from 'react'
 import { connect } from 'react-redux'
 import * as operations from '../../../state/elastic/operations'
@@ -11,13 +12,13 @@ class Elastic extends React.Component<Props> {
   public render() {
     return (
       <div>
-        <h2>Elastic</h2>
+        <Typography variant="h3">Search</Typography>
         <form onSubmit={this.handleSubmit}>
           <input type="text" name="search" placeholder="search text" />
           <input type="submit" value="Submit" />
         </form>
         <div>
-          <h3>result</h3>
+          <Typography variant="h4">Search Result</Typography>
           <SearchResultList />
         </div>
       </div>
