@@ -3,9 +3,9 @@ import TextField, { TextFieldProps } from '@material-ui/core/TextField'
 import React, { FormEvent } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import * as operations from '../../state/auth/operations'
-import { User } from '../../state/auth/reducers'
-import { State } from '../../types'
+import * as operations from '../../../state/auth/operations'
+import { User } from '../../../state/auth/reducers'
+import { State } from '../../../types'
 
 interface Props {
   login: (loginParams: { username: string; password: string }) => Promise<User>

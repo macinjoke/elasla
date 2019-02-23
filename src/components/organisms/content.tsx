@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { State } from '../../types'
-import Elastic from './elastic'
-import LoginForm from './loginForm'
+import Elastic from './contents/elastic'
+import LoginForm from './contents/loginForm'
 
 interface Props {
   isLogin: boolean

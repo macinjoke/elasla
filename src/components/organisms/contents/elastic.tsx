@@ -1,10 +1,10 @@
 import { unix } from 'moment'
 import React from 'react'
 import { connect } from 'react-redux'
-import { CONFIG } from '../../constants'
-import * as operations from '../../state/elastic/operations'
-import { Source } from '../../state/elastic/reducers'
-import { State } from '../../types'
+import { CONFIG } from '../../../constants'
+import * as operations from '../../../state/elastic/operations'
+import { Source } from '../../../state/elastic/reducers'
+import { State } from '../../../types'
 
 interface Props {
   search: (text: string) => void
