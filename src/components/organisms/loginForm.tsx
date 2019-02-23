@@ -1,5 +1,6 @@
 import Button, { ButtonProps } from '@material-ui/core/Button'
 import TextField, { TextFieldProps } from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 import React, { FormEvent } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
@@ -39,9 +40,13 @@ class LoginForm extends React.Component<Props> {
           margin="dense"
           type="password"
         />
-        {loginError && <p>パスワードが違います</p>}
+        {loginError && (
+          <Typography color="error">パスワードが違います</Typography>
+        )}
         {fetchSessionError && (
-          <p>セッションが切れました。もう一度ログインしてください。</p>
+          <Typography color="error">
+            セッションが切れました。もう一度ログインしてください。
+          </Typography>
         )}
         <StyledButton variant="contained" type="submit">
           Login

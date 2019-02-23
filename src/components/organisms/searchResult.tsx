@@ -1,3 +1,4 @@
+import Typography from '@material-ui/core/Typography'
 import { unix } from 'moment'
 import React from 'react'
 import { CONFIG } from '../../constants'
@@ -13,12 +14,12 @@ class SearchResult extends React.Component<Props> {
     const { source } = this.props
     return (
       <div style={{ border: 'solid 0.1rem black' }}>
-        <p>
+        <Typography variant="h6">
           <a href={`${this.url}/messages/${source.channel_name}`}>
             {source.channel_name}
           </a>
-        </p>
-        <p>
+        </Typography>
+        <Typography variant="subtitle1">
           <a
             // TODO ひとまずgeneralのチャンネル IDにしてある
             href={`${this.url}/messages/C02TM1NRB/team/${source.user}`}
@@ -32,8 +33,8 @@ class SearchResult extends React.Component<Props> {
           >
             {this.unixToFormatted(source.ts)}
           </a>
-        </p>
-        <p>{source.text}</p>
+        </Typography>
+        <Typography variant="subtitle1">{source.text}</Typography>
       </div>
     )
   }
