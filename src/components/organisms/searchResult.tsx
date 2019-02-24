@@ -1,8 +1,13 @@
-import Typography from '@material-ui/core/Typography'
+import Typography, { TypographyProps } from '@material-ui/core/Typography'
 import { unix } from 'moment'
 import React from 'react'
+import styled from 'styled-components'
 import { CONFIG } from '../../constants'
 import { Source } from '../../state/elastic/reducers'
+
+const StyledTypography = styled(Typography)`
+  overflow-wrap: break-word;
+` as React.ComponentType<TypographyProps>
 
 interface Props {
   source: Source
@@ -34,7 +39,7 @@ class SearchResult extends React.Component<Props> {
             {this.unixToFormatted(source.ts)}
           </a>
         </Typography>
-        <Typography variant="subtitle1">{source.text}</Typography>
+        <StyledTypography>{source.text}</StyledTypography>
       </div>
     )
   }
