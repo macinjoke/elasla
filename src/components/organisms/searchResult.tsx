@@ -18,13 +18,13 @@ class SearchResult extends React.Component<Props> {
   public render() {
     const { source } = this.props
     return (
-      <div style={{ border: 'solid 0.1rem black' }}>
+      <div>
         <Typography variant="h6">
           <a href={`${this.url}/messages/${source.channel_name}`}>
-            {source.channel_name}
+            #{source.channel_name}
           </a>
         </Typography>
-        <Typography variant="subtitle1">
+        <Typography>
           <a
             // TODO ひとまずgeneralのチャンネル IDにしてある
             href={`${this.url}/messages/C02TM1NRB/team/${source.user}`}

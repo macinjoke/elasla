@@ -1,3 +1,5 @@
+import Divider from '@material-ui/core/Divider'
+import List from '@material-ui/core/List'
 import React from 'react'
 import { connect } from 'react-redux'
 import { Source } from '../../state/elastic/reducers'
@@ -12,11 +14,14 @@ class SearchResultList extends React.Component<Props> {
   public render() {
     const { sources } = this.props
     return (
-      <div>
+      <List>
         {sources.map(source => (
-          <SearchResult source={source} />
+          <>
+            <SearchResult source={source} />
+            <Divider />
+          </>
         ))}
-      </div>
+      </List>
     )
   }
 }
