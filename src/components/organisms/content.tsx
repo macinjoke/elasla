@@ -10,7 +10,8 @@ interface Props {
 }
 
 const Div = styled.div`
-  width: 900px;
+  max-width: 900px;
+  min-width: 600px;
   margin: auto;
 `
 
