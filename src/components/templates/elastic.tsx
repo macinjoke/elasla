@@ -14,7 +14,6 @@ class Elastic extends React.Component<{}> {
       <Div>
         <Typography variant="h3">Search</Typography>
         <SearchForm />
-        <Typography variant="h4">Search Result</Typography>
         <SearchResultList />
       </Div>
     )
