@@ -6,7 +6,8 @@ Slack のメッセージログデータを Elasticsearch にいれてWeb から�
 
 バックエンド: https://github.com/macinjoke/elasla-backend
 
-![画面](https://i.gyazo.com/3c5bef299c138cdac9f48b05be5054f5.png)
+![画面2](https://i.gyazo.com/3ded5ccec3ea4648259dc647f3ede05c.png)
+![画面1](https://i.gyazo.com/3c5bef299c138cdac9f48b05be5054f5.png)
 
 # 背景
 macinjoke の所属する研究室のSlack が無料プランなのですぐに古いメッセージが読めなくなる。
