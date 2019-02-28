@@ -1,6 +1,6 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers'
 import { logout } from './actions'
-import { fetchSession, login } from './operations'
+import { fetchSession, login, registerUser } from './operations'
 
 export interface User {
   username: string
@@ -58,5 +58,9 @@ const reducer = reducerWithInitialState(initialState)
       fetchSessionError: error,
     }
   })
+  .case(registerUser.async.done, (state, { result: result }) => ({
+    ...state,
+    result,
+  }))
 
 export default reducer

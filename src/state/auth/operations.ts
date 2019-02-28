@@ -36,3 +36,24 @@ export const fetchSession = createAsync<{}, User>('FetchSession', async () => {
   }
   return res.json()
 })
+
+interface RegisterParams {
+  mailAddress: string
+  password: string
+}
+
+export const registerUser = createAsync<RegisterParams, any>(
+  'RegisterUser',
+  async params => {
+    console.log(params)
+    const res = await fetch('http://localhost:3000/api/register', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(params),
+    })
+    if (!res.ok) {
+      throw new Error(`${res.status}: ${res.statusText}`)
+    }
+    return res.json()
+  },
+)

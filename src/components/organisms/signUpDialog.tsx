@@ -8,12 +8,14 @@ import TextField, { TextFieldProps } from '@material-ui/core/TextField'
 import React, { ChangeEvent, ComponentType, FormEvent } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { registerUser as _registerUser } from '../../state/auth/operations'
 import * as actions from '../../state/dialog/actions'
 import { State as _State } from '../../types'
 
 interface Props {
   signUpDialog: boolean
   closeSignUpDialog: () => void
+  registerUser: (obj: { mailAddress: string; password: string }) => void
 }
 
 interface State {
@@ -77,11 +79,16 @@ class SignUpDialog extends React.Component<Props, State> {
   }
 
   private handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const { registerUser } = this.props
     e.preventDefault()
     console.log(e)
     const target = e.currentTarget
     console.log(target.email.value)
     console.log(target.password.value)
+    registerUser({
+      mailAddress: target.email.value,
+      password: target.password.value,
+    })
   }
 
   private handleClose = () => {
@@ -94,5 +101,8 @@ export default connect(
   (s: _State) => ({
     signUpDialog: s.dialog.signUpDialog,
   }),
-  { closeSignUpDialog: actions.closeSignUpDialog },
+  {
+    closeSignUpDialog: actions.closeSignUpDialog,
+    registerUser: _registerUser.action,
+  },
 )(SignUpDialog)
