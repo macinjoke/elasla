@@ -5,12 +5,12 @@ import { State, User } from './reducers'
 const actionCreator = actionCreatorFactory('auth')
 const createAsync = asyncFactory<State>(actionCreator)
 
-interface LoginPrams {
+interface LoginParams {
   username: string
   password: string
 }
 
-export const login = createAsync<LoginPrams, User>('Login', async params => {
+export const login = createAsync<LoginParams, User>('Login', async params => {
   const res = await fetch('http://localhost:3000/api/login', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
