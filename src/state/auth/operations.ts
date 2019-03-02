@@ -45,14 +45,13 @@ export const fetchSession = createAsync<{}, User>('FetchSession', async () => {
 })
 
 interface RegisterParams {
-  mailAddress: string
+  username: string
   password: string
 }
 
 export const registerUser = createAsync<RegisterParams, any>(
   'RegisterUser',
   async params => {
-    params.mailAddress = `${params.mailAddress}@${CONFIG.mail.domain}`
     const res = await fetch(
       `${CONFIG.backend.host}:${CONFIG.backend.port}/api/register`,
       {

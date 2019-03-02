@@ -15,7 +15,7 @@ import { State as _State } from '../../types'
 interface Props {
   signUpDialog: boolean
   closeSignUpDialog: () => void
-  registerUser: (obj: { mailAddress: string; password: string }) => void
+  registerUser: (obj: { username: string; password: string }) => void
 }
 
 interface State {
@@ -86,7 +86,7 @@ class SignUpDialog extends React.Component<Props, State> {
     console.log(target.email.value)
     console.log(target.password.value)
     registerUser({
-      mailAddress: target.email.value,
+      username: target.email.value,
       password: target.password.value,
     })
   }
