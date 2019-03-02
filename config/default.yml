@@ -1,5 +1,11 @@
+backend:
+  host: 'http://localhost'
+  port: '3000'
 elasticsearch:
   host: 'localhost'
   port: '9200'
 slack:
   workspace: 'iwailab'
+mail:
+  domain: 'cps.im.dendai.ac.jp'
+

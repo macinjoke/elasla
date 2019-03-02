@@ -1,10 +1,17 @@
 interface Config {
+  backend: {
+    host: string
+    port: string
+  }
   elasticsearch: {
     host: string
     port: string
   }
   slack: {
     workspace: string
+  }
+  mail: {
+    domain: string
   }
 }
 

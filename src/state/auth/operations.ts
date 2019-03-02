@@ -1,5 +1,6 @@
 import actionCreatorFactory from 'typescript-fsa'
 import { asyncFactory } from 'typescript-fsa-redux-thunk'
+import { CONFIG } from '../../constants'
 import { State, User } from './reducers'
 
 const actionCreator = actionCreatorFactory('auth')
@@ -11,11 +12,14 @@ interface LoginParams {
 }
 
 export const login = createAsync<LoginParams, User>('Login', async params => {
-  const res = await fetch('http://localhost:3000/api/login', {
-    method: 'post',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(params),
-  })
+  const res = await fetch(
+    `${CONFIG.backend.host}:${CONFIG.backend.port}/api/login`,
+    {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(params),
+    },
+  )
   if (!res.ok) {
     throw new Error(`${res.status}: ${res.statusText}`)
   }
@@ -27,9 +31,12 @@ export const fetchSession = createAsync<{}, User>('FetchSession', async () => {
   if (!jwt) {
     throw new Error(`jwt does not exist`)
   }
-  const res = await fetch('http://localhost:3000/api/login', {
-    headers: { authorization: `Bearer ${jwt}` },
-  })
+  const res = await fetch(
+    `${CONFIG.backend.host}:${CONFIG.backend.port}/api/login`,
+    {
+      headers: { authorization: `Bearer ${jwt}` },
+    },
+  )
   if (!res.ok) {
     localStorage.removeItem('jwt')
     throw new Error(`${res.status}: ${res.statusText}`)
@@ -45,12 +52,15 @@ interface RegisterParams {
 export const registerUser = createAsync<RegisterParams, any>(
   'RegisterUser',
   async params => {
-    params.mailAddress = params.mailAddress + '@cps.im.dendai.ac.jp'
-    const res = await fetch('http://localhost:3000/api/register', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(params),
-    })
+    params.mailAddress = `${params.mailAddress}@${CONFIG.mail.domain}`
+    const res = await fetch(
+      `${CONFIG.backend.host}:${CONFIG.backend.port}/api/register`,
+      {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(params),
+      },
+    )
     if (!res.ok) {
       throw new Error(`${res.status}: ${res.statusText}`)
     }
