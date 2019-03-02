@@ -45,7 +45,7 @@ interface RegisterParams {
 export const registerUser = createAsync<RegisterParams, any>(
   'RegisterUser',
   async params => {
-    console.log(params)
+    params.mailAddress = params.mailAddress + '@cps.im.dendai.ac.jp'
     const res = await fetch('http://localhost:3000/api/register', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
