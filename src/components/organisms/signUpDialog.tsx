@@ -14,7 +14,7 @@ import { State as _State } from '../../types'
 
 interface Props {
   isOpen: boolean
-  closeSignUpDialog: () => void
+  closeDialog: () => void
   registerUser: (obj: { username: string; password: string }) => void
 }
 
@@ -92,8 +92,8 @@ class SignUpDialog extends React.Component<Props, State> {
   }
 
   private handleClose = () => {
-    const { closeSignUpDialog } = this.props
-    closeSignUpDialog()
+    const { closeDialog } = this.props
+    closeDialog()
   }
 }
 
@@ -102,7 +102,7 @@ export default connect(
     isOpen: s.dialog.isSignUpDialogOpen,
   }),
   {
-    closeSignUpDialog: actions.closeSignUpDialog,
+    closeDialog: actions.closeSignUpDialog,
     registerUser: _registerUser.action,
   },
 )(SignUpDialog)
