@@ -13,7 +13,7 @@ import * as actions from '../../state/dialog/actions'
 import { State as _State } from '../../types'
 
 interface Props {
-  signUpDialog: boolean
+  isOpen: boolean
   closeSignUpDialog: () => void
   registerUser: (obj: { username: string; password: string }) => void
 }
@@ -40,9 +40,9 @@ class SignUpDialog extends React.Component<Props, State> {
   }
 
   public render() {
-    const { signUpDialog } = this.props
+    const { isOpen } = this.props
     return (
-      <Dialog open={signUpDialog} onClose={this.handleClose}>
+      <Dialog open={isOpen} onClose={this.handleClose}>
         <form onSubmit={this.handleSubmit}>
           <DialogTitle>新規登録</DialogTitle>
           <DialogContent>
@@ -99,7 +99,7 @@ class SignUpDialog extends React.Component<Props, State> {
 
 export default connect(
   (s: _State) => ({
-    signUpDialog: s.dialog.signUpDialog,
+    isOpen: s.dialog.isSignUpDialogOpen,
   }),
   {
     closeSignUpDialog: actions.closeSignUpDialog,

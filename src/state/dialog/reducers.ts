@@ -2,21 +2,21 @@ import { reducerWithInitialState } from 'typescript-fsa-reducers'
 import { closeSignUpDialog, openSignUpDialog } from './actions'
 
 export interface State {
-  signUpDialog: boolean
+  isSignUpDialogOpen: boolean
 }
 
 const initialState: State = {
-  signUpDialog: false,
+  isSignUpDialogOpen: false,
 }
 
 const reducer = reducerWithInitialState(initialState)
   .case(openSignUpDialog as any, (state: any) => ({
     ...state,
-    signUpDialog: true,
+    isSignUpDialogOpen: true,
   }))
   .case(closeSignUpDialog, state => ({
     ...state,
-    signUpDialog: false,
+    isSignUpDialogOpen: false,
   }))
 
 export default reducer
