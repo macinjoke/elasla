@@ -33,6 +33,7 @@ const reducer = reducerWithInitialState(initialState)
     user: null,
   }))
   .case(login.async.failed, (state, { error }) => {
+    // TODO 503 とかコネクションエラーのときに違うの出す
     return {
       ...refreshError(state),
       isLogin: false,
