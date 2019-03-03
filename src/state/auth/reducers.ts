@@ -4,6 +4,7 @@ import { fetchSession, login, registerUser } from './operations'
 
 export interface User {
   username: string
+  isMailAuthed: boolean
   jwt: string
 }
 
