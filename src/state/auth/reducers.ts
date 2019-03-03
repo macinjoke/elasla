@@ -4,7 +4,6 @@ import { fetchSession, login, registerUser } from './operations'
 
 export interface User {
   username: string
-  password: string
   jwt: string
 }
 
