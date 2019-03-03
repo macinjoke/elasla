@@ -10,7 +10,7 @@ const initialState: State = {
 }
 
 const reducer = reducerWithInitialState(initialState)
-  .case(openSignUpDialog as any, (state: any) => ({
+  .case(openSignUpDialog, state => ({
     ...state,
     isSignUpDialogOpen: true,
   }))
