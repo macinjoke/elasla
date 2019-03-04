@@ -1,4 +1,5 @@
 import Button from '@material-ui/core/Button'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -14,6 +15,7 @@ import { State as _State } from '../../types'
 
 interface Props {
   isOpen: boolean
+  isLoading: boolean
   closeDialog: () => void
   registerUser: (obj: { username: string; password: string }) => void
 }
@@ -40,36 +42,42 @@ class SignUpDialog extends React.Component<Props, State> {
   }
 
   public render() {
-    const { isOpen } = this.props
+    const { isOpen, isLoading } = this.props
     return (
       <Dialog open={isOpen} onClose={this.handleClose}>
-        <form onSubmit={this.handleSubmit}>
-          <DialogTitle>新規登録</DialogTitle>
+        {isLoading ? (
           <DialogContent>
-            <DialogContentText>
-              メールアドレスとパスワードを入力してください
-            </DialogContentText>
-            <Div>
-              <StyledTextField
-                style={{ width: `${this.state.count * 10}px` }}
-                autoFocus
-                id="email"
-                label="Email"
-                onChange={this.handleChange}
-              />
-              <P>@cps.im.dendai.ac.jp</P>
-            </Div>
-            <TextField name="password" label="Password" fullWidth />
+            <CircularProgress />
           </DialogContent>
-          <DialogActions>
-            <Button color="primary" onClick={this.handleClose}>
-              戻る
-            </Button>
-            <Button color="primary" type="submit">
-              送信
-            </Button>
-          </DialogActions>
-        </form>
+        ) : (
+          <form onSubmit={this.handleSubmit}>
+            <DialogTitle>新規登録</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                メールアドレスとパスワードを入力してください
+              </DialogContentText>
+              <Div>
+                <StyledTextField
+                  style={{ width: `${this.state.count * 10}px` }}
+                  autoFocus
+                  id="email"
+                  label="Email"
+                  onChange={this.handleChange}
+                />
+                <P>@cps.im.dendai.ac.jp</P>
+              </Div>
+              <TextField name="password" label="Password" fullWidth />
+            </DialogContent>
+            <DialogActions>
+              <Button color="primary" onClick={this.handleClose}>
+                戻る
+              </Button>
+              <Button color="primary" type="submit">
+                送信
+              </Button>
+            </DialogActions>
+          </form>
+        )}
       </Dialog>
     )
   }
@@ -100,6 +108,7 @@ class SignUpDialog extends React.Component<Props, State> {
 export default connect(
   (s: _State) => ({
     isOpen: s.dialog.isSignUpDialogOpen,
+    isLoading: s.dialog.isLoading,
   }),
   {
     closeDialog: actions.closeSignUpDialog,
