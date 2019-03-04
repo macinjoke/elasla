@@ -15,7 +15,7 @@ import { State as _State } from '../../types'
 
 interface Props {
   isOpen: boolean
-  isLoading: boolean
+  status: 'default' | 'loading' | 'done'
   closeDialog: () => void
   registerUser: (obj: { username: string; password: string }) => void
 }
@@ -42,42 +42,57 @@ class SignUpDialog extends React.Component<Props, State> {
   }
 
   public render() {
-    const { isOpen, isLoading } = this.props
+    const { isOpen, status } = this.props
     return (
       <Dialog open={isOpen} onClose={this.handleClose}>
-        {isLoading ? (
-          <DialogContent>
-            <CircularProgress />
-          </DialogContent>
-        ) : (
-          <form onSubmit={this.handleSubmit}>
-            <DialogTitle>新規登録</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                メールアドレスとパスワードを入力してください
-              </DialogContentText>
-              <Div>
-                <StyledTextField
-                  style={{ width: `${this.state.count * 10}px` }}
-                  autoFocus
-                  id="email"
-                  label="Email"
-                  onChange={this.handleChange}
-                />
-                <P>@cps.im.dendai.ac.jp</P>
-              </Div>
-              <TextField name="password" label="Password" fullWidth />
-            </DialogContent>
-            <DialogActions>
-              <Button color="primary" onClick={this.handleClose}>
-                戻る
-              </Button>
-              <Button color="primary" type="submit">
-                送信
-              </Button>
-            </DialogActions>
-          </form>
-        )}
+        {
+          {
+            default: (
+              <form onSubmit={this.handleSubmit}>
+                <DialogTitle>新規登録</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    メールアドレスとパスワードを入力してください
+                  </DialogContentText>
+                  <Div>
+                    <StyledTextField
+                      style={{ width: `${this.state.count * 10}px` }}
+                      autoFocus
+                      id="email"
+                      label="Email"
+                      onChange={this.handleChange}
+                    />
+                    <P>@cps.im.dendai.ac.jp</P>
+                  </Div>
+                  <TextField name="password" label="Password" fullWidth />
+                </DialogContent>
+                <DialogActions>
+                  <Button color="primary" onClick={this.handleClose}>
+                    戻る
+                  </Button>
+                  <Button color="primary" type="submit">
+                    送信
+                  </Button>
+                </DialogActions>
+              </form>
+            ),
+            loading: (
+              <DialogContent>
+                <CircularProgress />
+              </DialogContent>
+            ),
+            done: (
+              <>
+                <DialogTitle>登録完了</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    登録したメールアドレスに届くメールを確認してください。
+                  </DialogContentText>
+                </DialogContent>
+              </>
+            ),
+          }[status]
+        }
       </Dialog>
     )
   }
@@ -108,7 +123,7 @@ class SignUpDialog extends React.Component<Props, State> {
 export default connect(
   (s: _State) => ({
     isOpen: s.dialog.isSignUpDialogOpen,
-    isLoading: s.dialog.isLoading,
+    status: s.dialog.status,
   }),
   {
     closeDialog: actions.closeSignUpDialog,

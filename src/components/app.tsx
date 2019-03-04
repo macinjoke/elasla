@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import * as actions from '../state/auth/operations'
 import Content from './organisms/content'
 import Header from './organisms/header'
-import RegistrationFinishDialog from './organisms/registrationFinishDialog'
 import SignUpDialog from './organisms/signUpDialog'
 
 interface Props {
@@ -24,7 +23,6 @@ class App extends React.Component<Props> {
         <Header />
         <Content />
         <SignUpDialog />
-        <RegistrationFinishDialog />
       </>
     )
   }
