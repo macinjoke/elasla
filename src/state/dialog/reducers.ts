@@ -5,11 +5,13 @@ import { closeSignUpDialog, openSignUpDialog } from './actions'
 export interface State {
   isSignUpDialogOpen: boolean
   status: 'default' | 'loading' | 'done'
+  registeredUser: string
 }
 
 const initialState: State = {
   isSignUpDialogOpen: false,
   status: 'default',
+  registeredUser: null,
 }
 
 const reducer = reducerWithInitialState(initialState)
@@ -25,9 +27,10 @@ const reducer = reducerWithInitialState(initialState)
     ...state,
     status: 'loading',
   }))
-  .case(registerUser.async.done, (state: State) => ({
+  .case(registerUser.async.done, (state: State, { result: result }) => ({
     ...state,
     status: 'done',
+    registeredUser: result.username,
   }))
 
 export default reducer

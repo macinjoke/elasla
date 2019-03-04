@@ -5,6 +5,7 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import React from 'react'
 import { connect } from 'react-redux'
+import { CONFIG } from '../../constants'
 import * as actions from '../../state/dialog/actions'
 import { State } from '../../types'
 import SignUpForm from './signUpForm'
@@ -12,12 +13,13 @@ import SignUpForm from './signUpForm'
 interface Props {
   isOpen: boolean
   status: 'default' | 'loading' | 'done'
+  registeredUser: string
   closeDialog: () => void
 }
 
 class SignUpDialog extends React.Component<Props> {
   public render() {
-    const { isOpen, status } = this.props
+    const { isOpen, status, registeredUser } = this.props
     return (
       <Dialog open={isOpen} onClose={this.handleClose}>
         {
@@ -33,7 +35,8 @@ class SignUpDialog extends React.Component<Props> {
                 <DialogTitle>登録完了</DialogTitle>
                 <DialogContent>
                   <DialogContentText>
-                    登録したメールアドレスに届くメールを確認してください。
+                    {registeredUser}@{CONFIG.mail.domain}{' '}
+                    に届くメールを確認してください。
                   </DialogContentText>
                 </DialogContent>
               </>
@@ -54,6 +57,7 @@ export default connect(
   (s: State) => ({
     isOpen: s.dialog.isSignUpDialogOpen,
     status: s.dialog.status,
+    registeredUser: s.dialog.registeredUser,
   }),
   {
     closeDialog: actions.closeSignUpDialog,
