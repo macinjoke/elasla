@@ -1,5 +1,7 @@
+import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
@@ -39,6 +41,11 @@ class SignUpDialog extends React.Component<Props> {
                     に届くメールを確認してください。
                   </DialogContentText>
                 </DialogContent>
+                <DialogActions>
+                  <Button color="primary" onClick={this.handleClick}>
+                    閉じる
+                  </Button>
+                </DialogActions>
               </>
             ),
           }[status]
@@ -49,7 +56,12 @@ class SignUpDialog extends React.Component<Props> {
 
   private handleClose = () => {
     const { closeDialog, status } = this.props
-    if (status === 'loading') return
+    if (status !== 'default') return
+    closeDialog()
+  }
+
+  private handleClick = () => {
+    const { closeDialog } = this.props
     closeDialog()
   }
 }
