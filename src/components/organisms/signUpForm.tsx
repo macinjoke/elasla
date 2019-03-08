@@ -4,6 +4,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import TextField, { TextFieldProps } from '@material-ui/core/TextField'
+import Typography, { TypographyProps } from '@material-ui/core/Typography'
 import React, { ChangeEvent, ComponentType, FormEvent } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
@@ -20,9 +21,9 @@ interface State {
   count: number
 }
 
-const P = styled.p`
+const StyledTypography = styled(Typography)`
   margin-top: 20px;
-`
+` as ComponentType<TypographyProps>
 
 const Div = styled.div`
   display: flex;
@@ -53,7 +54,7 @@ class SignUpForm extends React.Component<Props, State> {
               label="Email"
               onChange={this.handleChange}
             />
-            <P>@cps.im.dendai.ac.jp</P>
+            <StyledTypography>@cps.im.dendai.ac.jp</StyledTypography>
           </Div>
           <TextField name="password" label="Password" fullWidth />
         </DialogContent>
