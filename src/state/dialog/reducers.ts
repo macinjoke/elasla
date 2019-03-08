@@ -18,6 +18,7 @@ const reducer = reducerWithInitialState(initialState)
   .case(openSignUpDialog, state => ({
     ...state,
     isSignUpDialogOpen: true,
+    status: 'default',
   }))
   .case(closeSignUpDialog, state => ({
     ...state,

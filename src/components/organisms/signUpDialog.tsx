@@ -48,7 +48,8 @@ class SignUpDialog extends React.Component<Props> {
   }
 
   private handleClose = () => {
-    const { closeDialog } = this.props
+    const { closeDialog, status } = this.props
+    if (status === 'loading') return
     closeDialog()
   }
 }
