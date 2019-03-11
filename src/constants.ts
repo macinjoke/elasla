@@ -3,10 +3,6 @@ interface Config {
     host: string
     port: string
   }
-  elasticsearch: {
-    host: string
-    port: string
-  }
   slack: {
     workspace: string
   }
