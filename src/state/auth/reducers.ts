@@ -17,7 +17,11 @@ export interface State {
 
 const initialState: State = {
   isLogin: false,
-  user: null,
+  user: {
+    username: null,
+    isMailAuthed: null,
+    jwt: localStorage.getItem('jwt'),
+  },
   loginError: null,
   fetchSessionError: null,
 }

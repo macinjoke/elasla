@@ -26,23 +26,25 @@ export const login = createAsync<LoginParams, User>('Login', async params => {
   return res.json()
 })
 
-export const fetchSession = createAsync<{}, User>('FetchSession', async () => {
-  const jwt = localStorage.getItem('jwt')
-  if (!jwt) {
-    throw new Error(`jwt does not exist`)
-  }
-  const res = await fetch(
-    `${CONFIG.backend.host}:${CONFIG.backend.port}/api/login`,
-    {
-      headers: { authorization: `Bearer ${jwt}` },
-    },
-  )
-  if (!res.ok) {
-    localStorage.removeItem('jwt')
-    throw new Error(`${res.status}: ${res.statusText}`)
-  }
-  return res.json()
-})
+export const fetchSession = createAsync<string, User>(
+  'FetchSession',
+  async jwt => {
+    if (!jwt) {
+      throw new Error(`jwt does not exist`)
+    }
+    const res = await fetch(
+      `${CONFIG.backend.host}:${CONFIG.backend.port}/api/login`,
+      {
+        headers: { authorization: `Bearer ${jwt}` },
+      },
+    )
+    if (!res.ok) {
+      localStorage.removeItem('jwt')
+      throw new Error(`${res.status}: ${res.statusText}`)
+    }
+    return res.json()
+  },
+)
 
 interface RegisterParams {
   username: string

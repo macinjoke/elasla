@@ -3,18 +3,20 @@ import React from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../state/auth/operations'
 import { User } from '../state/auth/reducers'
+import { State } from '../types'
 import Content from './organisms/content'
 import Header from './organisms/header'
 import SignUpDialog from './organisms/signUpDialog'
 
 interface Props {
-  fetchSession: () => Promise<User>
+  fetchSession: (jwt: string) => Promise<User>
+  user: User
 }
 
 class App extends React.Component<Props> {
   public async componentWillMount() {
-    const { fetchSession } = this.props
-    const res = await fetchSession()
+    const { fetchSession, user } = this.props
+    const res = await fetchSession(user.jwt)
     console.log(res)
     localStorage.setItem('jwt', res.jwt)
   }
@@ -32,7 +34,9 @@ class App extends React.Component<Props> {
 }
 
 export default connect(
-  null,
+  (s: State) => ({
+    user: s.auth.user,
+  }),
   {
     fetchSession: actions.fetchSession.action,
   },

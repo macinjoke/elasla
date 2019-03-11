@@ -7,16 +7,20 @@ import { asyncFactory } from 'typescript-fsa-redux-thunk'
 const actionCreator = actionCreatorFactory('elastic')
 const createAsync = asyncFactory<State>(actionCreator)
 
-export const search = createAsync<string, Source[]>('Search', async text => {
-  const jwt = localStorage.getItem('jwt')
-  const res = await fetch(
-    `${CONFIG.backend.host}:${CONFIG.backend.port}/api/search?q=${text}`,
-    {
-      headers: { authorization: `Bearer ${jwt}` },
-    },
-  )
-  if (!res.ok) {
-    throw new Error(`${res.status}: ${res.statusText}`)
-  }
-  return res.json()
-})
+export const search = createAsync<{ text: string; jwt: string }, Source[]>(
+  'Search',
+  async params => {
+    const res = await fetch(
+      `${CONFIG.backend.host}:${CONFIG.backend.port}/api/search?q=${
+        params.text
+      }`,
+      {
+        headers: { authorization: `Bearer ${params.jwt}` },
+      },
+    )
+    if (!res.ok) {
+      throw new Error(`${res.status}: ${res.statusText}`)
+    }
+    return res.json()
+  },
+)

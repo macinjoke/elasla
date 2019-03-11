@@ -3,14 +3,17 @@ import TextField from '@material-ui/core/TextField'
 import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { User } from '../../state/auth/reducers'
 import * as operations from '../../state/elastic/operations'
+import { State } from '../../types'
 
 const StyledForm = styled.form`
   display: flex;
   align-items: center;
 `
 interface Props {
-  search: (text: string) => void
+  search: (params: { text: string; jwt: string }) => void
+  user: User
 }
 
 class SearchForm extends React.Component<Props> {
@@ -33,11 +36,14 @@ class SearchForm extends React.Component<Props> {
 
   private handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    this.props.search(e.currentTarget.search.value)
+    const { search, user } = this.props
+    search({ text: e.currentTarget.search.value, jwt: user.jwt })
   }
 }
 
 export default connect(
-  null,
+  (s: State) => ({
+    user: s.auth.user,
+  }),
   { search: operations.search.action },
 )(SearchForm)
