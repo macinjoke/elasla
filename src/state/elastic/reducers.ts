@@ -25,7 +25,7 @@ const reducer = reducerWithInitialState(initialState).case(
   search.async.done,
   (state, { result: response }) => ({
     ...state,
-    sources: response.hits.hits.map((hit: any) => hit._source),
+    sources: response,
   }),
 )
 
