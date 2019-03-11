@@ -59,11 +59,10 @@ class LoginForm extends React.Component<Props> {
     e.preventDefault()
     const { login } = this.props
     const target = e.currentTarget
-    const res = await login({
+    await login({
       username: target.username.value,
       password: target.password.value,
     })
-    localStorage.setItem('jwt', res.jwt)
   }
 }
 

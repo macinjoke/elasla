@@ -41,7 +41,6 @@ class Header extends React.Component<Props> {
   private handleLogout = () => {
     const { logout } = this.props
     logout()
-    localStorage.removeItem('jwt')
   }
   private handleSignUpButton = () => {
     const { openSignUpDialog } = this.props

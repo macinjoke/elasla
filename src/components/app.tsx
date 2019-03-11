@@ -16,9 +16,7 @@ interface Props {
 class App extends React.Component<Props> {
   public async componentWillMount() {
     const { fetchSession, user } = this.props
-    const res = await fetchSession(user.jwt)
-    console.log(res)
-    localStorage.setItem('jwt', res.jwt)
+    await fetchSession(user.jwt)
   }
 
   public render() {

@@ -39,7 +39,6 @@ export const fetchSession = createAsync<string, User>(
       },
     )
     if (!res.ok) {
-      localStorage.removeItem('jwt')
       throw new Error(`${res.status}: ${res.statusText}`)
     }
     return res.json()
