@@ -12,5 +12,6 @@
     ],
     "noImplicitAny": true,
     "noImplicitReturns": true,
+    "strictNullChecks": true,
   },
 }

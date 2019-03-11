@@ -5,13 +5,12 @@ import { closeSignUpDialog, openSignUpDialog } from './actions'
 export interface State {
   isSignUpDialogOpen: boolean
   status: 'default' | 'loading' | 'done'
-  registeredUser: string
+  registeredUser?: string
 }
 
 const initialState: State = {
   isSignUpDialogOpen: false,
   status: 'default',
-  registeredUser: null,
 }
 
 const reducer = reducerWithInitialState(initialState)

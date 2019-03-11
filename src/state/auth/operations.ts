@@ -29,9 +29,6 @@ export const login = createAsync<LoginParams, User>('Login', async params => {
 export const fetchSession = createAsync<string, User>(
   'FetchSession',
   async jwt => {
-    if (!jwt) {
-      throw new Error(`jwt does not exist`)
-    }
     const res = await fetch(
       `${CONFIG.backend.host}:${CONFIG.backend.port}/api/login`,
       {

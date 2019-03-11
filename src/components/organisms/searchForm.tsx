@@ -37,7 +37,7 @@ class SearchForm extends React.Component<Props> {
   private handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const { search, user } = this.props
-    search({ text: e.currentTarget.search.value, jwt: user.jwt })
+    search({ text: e.currentTarget.search.value, jwt: user.jwt || '' })
   }
 }
 

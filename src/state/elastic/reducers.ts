@@ -27,6 +27,7 @@ const reducer = reducerWithInitialState(initialState).case(
     ...state,
     sources: response,
   }),
+  // TODO failed のとき (特にjwt のエラー) に適切な処理をする
 )
 
 export default reducer

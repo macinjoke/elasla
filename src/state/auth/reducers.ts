@@ -3,24 +3,22 @@ import { logout } from './actions'
 import { fetchSession, login, registerUser } from './operations'
 
 export interface User {
-  username: string
-  isMailAuthed: boolean
-  jwt: string
+  username?: string
+  isMailAuthed?: boolean
+  jwt?: string
 }
 
 export interface State {
   isLogin: boolean
   user: User
-  loginError: Error
-  fetchSessionError: Error
+  loginError: Error | null
+  fetchSessionError: Error | null
 }
 
 const initialState: State = {
   isLogin: false,
   user: {
-    username: null,
-    isMailAuthed: null,
-    jwt: localStorage.getItem('jwt'),
+    jwt: localStorage.getItem('jwt') || '',
   },
   loginError: null,
   fetchSessionError: null,
@@ -34,7 +32,7 @@ const reducer = reducerWithInitialState(initialState)
   .case(logout, state => ({
     ...refreshError(state),
     isLogin: false,
-    user: null,
+    user: {},
   }))
   .case(login.async.failed, (state, { error }) => {
     // TODO 503 とかコネクションエラーのときに違うの出す
@@ -61,6 +59,7 @@ const reducer = reducerWithInitialState(initialState)
     return {
       ...refreshError(state),
       fetchSessionError: error,
+      user: { jwt: '' },
     }
   })
   .case(registerUser.async.done, (state, { result: result }) => ({

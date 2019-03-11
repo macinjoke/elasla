@@ -16,6 +16,7 @@ interface Props {
 class App extends React.Component<Props> {
   public async componentWillMount() {
     const { fetchSession, user } = this.props
+    if (!user.jwt) return
     await fetchSession(user.jwt)
   }
 
