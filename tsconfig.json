@@ -10,6 +10,7 @@
       "es2018",
       "dom"
     ],
+    "strictFunctionTypes": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "strictNullChecks": true,

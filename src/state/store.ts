@@ -1,14 +1,13 @@
 // @flow
 import {
-  Action,
   applyMiddleware,
   combineReducers,
   compose,
   createStore,
-  Dispatch,
-  Store,
+  Middleware,
 } from 'redux'
 import thunk from 'redux-thunk'
+import { State } from '../types'
 import authReducer from './auth/reducers'
 import dialogReducer from './dialog/reducers'
 import elasticReducer from './elastic/reducers'
@@ -25,9 +24,11 @@ const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     })
   : compose
 
-const localStorageMiddleware = (store: Store) => (next: Dispatch) => (
-  action: Action,
-) => {
+// state.auth.user.jwt の値の変化に応じて localStorage を操作
+const localStorageMiddleware: Middleware<
+  {},
+  State
+> = store => next => action => {
   const prevState = store.getState()
   const prevJwt = prevState.auth.user && prevState.auth.user.jwt
   next(action)
