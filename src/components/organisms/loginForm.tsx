@@ -10,8 +10,8 @@ import { State } from '../../types'
 
 interface Props {
   login: (loginParams: { username: string; password: string }) => Promise<User>
-  loginError: Error
-  fetchSessionError: Error
+  loginError: Error | null
+  fetchSessionError: Error | null
 }
 
 const StyledTextField = styled(TextField)`

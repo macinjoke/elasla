@@ -11,6 +11,7 @@
       "dom"
     ],
     "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "strictNullChecks": true,

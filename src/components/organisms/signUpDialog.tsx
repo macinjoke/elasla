@@ -15,7 +15,7 @@ import SignUpForm from './signUpForm'
 interface Props {
   isOpen: boolean
   status: 'default' | 'loading' | 'done'
-  registeredUser: string
+  registeredUser?: string
   closeDialog: () => void
 }
 
