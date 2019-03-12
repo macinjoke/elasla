@@ -29,11 +29,9 @@ const localStorageMiddleware: Middleware<
   {},
   State
 > = store => next => action => {
-  const prevState = store.getState()
-  const prevJwt = prevState.auth.user && prevState.auth.user.jwt
+  const prevJwt = store.getState().auth.user.jwt
   next(action)
-  const nextState = store.getState()
-  const nextJwt = nextState.auth.user && nextState.auth.user.jwt
+  const nextJwt = store.getState().auth.user.jwt
   if (!nextJwt) {
     localStorage.removeItem('jwt')
     return
