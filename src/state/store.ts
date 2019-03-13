@@ -31,13 +31,12 @@ const localStorageMiddleware: Middleware<
   const prevJwt = store.getState().auth.user.jwt
   next(action)
   const nextJwt = store.getState().auth.user.jwt
-  if (!nextJwt) {
-    localStorage.removeItem('jwt')
+  if (prevJwt === nextJwt) return
+  if (nextJwt) {
+    localStorage.setItem('jwt', nextJwt)
     return
   }
-  if (prevJwt !== nextJwt) {
-    localStorage.setItem('jwt', nextJwt)
-  }
+  localStorage.removeItem('jwt')
 }
 
 export default function configureStore() {
