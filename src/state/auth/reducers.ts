@@ -64,7 +64,7 @@ const reducer = reducerWithInitialState(initialState)
   })
   .case(registerUser.async.done, (state, { result: result }) => ({
     ...state,
-    result,
+    result, // TODO result なんてないやん
   }))
 
 export default reducer
