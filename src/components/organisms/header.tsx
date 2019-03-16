@@ -1,15 +1,18 @@
 import AppBar from '@material-ui/core/AppBar'
 import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
 import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { CONFIG } from '../../constants'
 import { logout as _logout } from '../../state/auth/actions'
 import { openDialog as _openDialog } from '../../state/signUpDialog/actions'
 import { State } from '../../types'
 
 interface Props {
   isLogin: boolean
+  username?: string
   logout: () => void
   openDialog: () => void
 }
@@ -20,15 +23,20 @@ const Title = styled.h1`
 
 class Header extends React.Component<Props> {
   public render() {
-    const { isLogin } = this.props
+    const { isLogin, username } = this.props
     return (
       <AppBar position="sticky">
         <Toolbar>
           <Title>elasla</Title>
           {isLogin ? (
-            <Button onClick={this.handleLogout} color="inherit">
-              Logout
-            </Button>
+            <>
+              <Typography>
+                {username}@{CONFIG.mail.domain}
+              </Typography>
+              <Button onClick={this.handleLogout} color="inherit">
+                Logout
+              </Button>
+            </>
           ) : (
             <Button color="inherit" onClick={this.handleSignUpButton}>
               新規登録
@@ -51,6 +59,7 @@ class Header extends React.Component<Props> {
 export default connect(
   (s: State) => ({
     isLogin: s.auth.isLogin,
+    username: s.auth.user.username,
   }),
   { logout: _logout, openDialog: _openDialog },
 )(Header)
