@@ -8,14 +8,14 @@ import {
 import thunk from 'redux-thunk'
 import { State } from '../types'
 import authReducer from './auth/reducers'
-import dialogReducer from './dialog/reducers'
 import elasticReducer from './elastic/reducers'
 import mailCompleteDialogReducer from './mailCompleteDialog/reducers'
+import signUpDialogReducer from './signUpDialog/reducers'
 
 const reducer = combineReducers({
   auth: authReducer,
   elastic: elasticReducer,
-  dialog: dialogReducer,
+  signUpDialog: signUpDialogReducer,
   mailCompleteDialog: mailCompleteDialogReducer,
 })
 

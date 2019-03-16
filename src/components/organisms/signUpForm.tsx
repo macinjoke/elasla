@@ -9,7 +9,7 @@ import React, { ChangeEvent, ComponentType, FormEvent } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { registerUser as _registerUser } from '../../state/auth/operations'
-import * as actions from '../../state/dialog/actions'
+import * as actions from '../../state/signUpDialog/actions'
 import { State as _State } from '../../types'
 
 interface Props {
@@ -94,11 +94,11 @@ class SignUpForm extends React.Component<Props, State> {
 
 export default connect(
   (s: _State) => ({
-    isOpen: s.dialog.isSignUpDialogOpen,
-    status: s.dialog.status,
+    isOpen: s.signUpDialog.isOpen,
+    status: s.signUpDialog.status,
   }),
   {
-    closeDialog: actions.closeSignUpDialog,
+    closeDialog: actions.closeDialog,
     registerUser: _registerUser.action,
   },
 )(SignUpForm)

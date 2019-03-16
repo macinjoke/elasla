@@ -8,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import React from 'react'
 import { connect } from 'react-redux'
 import { CONFIG } from '../../constants'
-import * as actions from '../../state/dialog/actions'
+import * as actions from '../../state/signUpDialog/actions'
 import { State } from '../../types'
 import SignUpForm from './signUpForm'
 
@@ -68,11 +68,11 @@ class SignUpDialog extends React.Component<Props> {
 
 export default connect(
   (s: State) => ({
-    isOpen: s.dialog.isSignUpDialogOpen,
-    status: s.dialog.status,
-    registeredUser: s.dialog.registeredUser,
+    isOpen: s.signUpDialog.isOpen,
+    status: s.signUpDialog.status,
+    registeredUser: s.signUpDialog.registeredUser,
   }),
   {
-    closeDialog: actions.closeSignUpDialog,
+    closeDialog: actions.closeDialog,
   },
 )(SignUpDialog)

@@ -1,27 +1,27 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers'
 import { registerUser } from '../auth/operations'
-import { closeSignUpDialog, openSignUpDialog } from './actions'
+import { closeDialog, openDialog } from './actions'
 
 export interface State {
-  isSignUpDialogOpen: boolean
+  isOpen: boolean
   status: 'default' | 'loading' | 'done'
   registeredUser?: string
 }
 
 const initialState: State = {
-  isSignUpDialogOpen: false,
+  isOpen: false,
   status: 'default',
 }
 
 const reducer = reducerWithInitialState(initialState)
-  .case(openSignUpDialog, state => ({
+  .case(openDialog, state => ({
     ...state,
-    isSignUpDialogOpen: true,
+    isOpen: true,
     status: 'default',
   }))
-  .case(closeSignUpDialog, state => ({
+  .case(closeDialog, state => ({
     ...state,
-    isSignUpDialogOpen: false,
+    isOpen: false,
   }))
   .case(registerUser.async.started, (state: State) => ({
     ...state,
