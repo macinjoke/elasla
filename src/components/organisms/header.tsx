@@ -1,8 +1,8 @@
 import AppBar from '@material-ui/core/AppBar'
 import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import React from 'react'
+import Typography, { TypographyProps } from '@material-ui/core/Typography'
+import React, { ComponentType } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { CONFIG } from '../../constants'
@@ -17,9 +17,9 @@ interface Props {
   openDialog: () => void
 }
 
-const Title = styled.h1`
+const Title = styled(Typography)`
   flex-grow: 1;
-`
+` as ComponentType<TypographyProps>
 
 class Header extends React.Component<Props> {
   public render() {
@@ -27,10 +27,12 @@ class Header extends React.Component<Props> {
     return (
       <AppBar position="sticky">
         <Toolbar>
-          <Title>elasla</Title>
+          <Title variant="h3" color="inherit">
+            elasla
+          </Title>
           {isLogin ? (
             <>
-              <Typography>
+              <Typography variant="h6" color="textSecondary">
                 {username}@{CONFIG.mail.domain}
               </Typography>
               <Button onClick={this.handleLogout} color="inherit">
