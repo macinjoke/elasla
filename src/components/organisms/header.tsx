@@ -32,7 +32,7 @@ class Header extends React.Component<Props> {
           </Title>
           {isLogin ? (
             <>
-              <Typography variant="h6" color="textSecondary">
+              <Typography color="textSecondary">
                 {username}@{CONFIG.mail.domain}
               </Typography>
               <Button onClick={this.handleLogout} color="inherit">
