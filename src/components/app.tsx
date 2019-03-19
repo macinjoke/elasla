@@ -1,6 +1,10 @@
+import CircularProgress, {
+  CircularProgressProps,
+} from '@material-ui/core/CircularProgress'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import React from 'react'
+import React, { ComponentType } from 'react'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 import * as actions from '../state/auth/operations'
 import { User } from '../state/auth/reducers'
 import { openDialog as _openDialog } from '../state/mailCompleteDialog/actions'
@@ -14,7 +18,14 @@ interface Props {
   openDialog: () => void
   fetchSession: (jwt: string) => Promise<User>
   user: User
+  isFetchingSession: boolean
 }
+
+const _CircularProgress = styled(CircularProgress)`
+  position: absolute;
+  top: 45%;
+  left: 45%; // transform: translate(-50%, -50%) するとキモい動きになるので...;
+` as ComponentType<CircularProgressProps>
 
 class App extends React.Component<Props> {
   public async componentWillMount() {
@@ -29,11 +40,18 @@ class App extends React.Component<Props> {
   }
 
   public render() {
+    const { isFetchingSession } = this.props
     return (
       <>
         <CssBaseline />
-        <Header />
-        <Content />
+        {isFetchingSession ? (
+          <_CircularProgress />
+        ) : (
+          <>
+            <Header />
+            <Content />
+          </>
+        )}
         <SignUpDialog />
         <MailCompleteDialog />
       </>
@@ -44,6 +62,7 @@ class App extends React.Component<Props> {
 export default connect(
   (s: State) => ({
     user: s.auth.user,
+    isFetchingSession: s.auth.isFetchingSession,
   }),
   {
     fetchSession: actions.fetchSession.action,

@@ -11,6 +11,7 @@ export interface User {
 export interface State {
   isLogin: boolean
   user: User
+  isFetchingSession: boolean
   loginError: Error | null
   fetchSessionError: Error | null
 }
@@ -20,6 +21,7 @@ const initialState: State = {
   user: {
     jwt: localStorage.getItem('jwt') || '',
   },
+  isFetchingSession: false,
   loginError: null,
   fetchSessionError: null,
 }
@@ -47,9 +49,14 @@ const reducer = reducerWithInitialState(initialState)
     isLogin: true,
     user,
   }))
+  .case(fetchSession.async.started, state => ({
+    ...state,
+    isFetchingSession: true,
+  }))
   .case(fetchSession.async.done, (state, { result: user }) => ({
     ...state,
     isLogin: true,
+    isFetchingSession: false,
     user,
   }))
   .case(fetchSession.async.failed, (state, { error }) => {
@@ -59,6 +66,7 @@ const reducer = reducerWithInitialState(initialState)
     return {
       ...refreshError(state),
       fetchSessionError: error,
+      isFetchingSession: false,
       user: { jwt: '' },
     }
   })
