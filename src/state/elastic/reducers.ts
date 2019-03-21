@@ -15,19 +15,27 @@ export interface Source {
 
 export interface State {
   sources: Source[]
+  isSearching: boolean
 }
 
 const initialState: State = {
   sources: [],
+  isSearching: false,
 }
 
-const reducer = reducerWithInitialState(initialState).case(
-  search.async.done,
-  (state, { result: response }) => ({
+const reducer = reducerWithInitialState(initialState)
+  .case(search.async.started, state => ({
     ...state,
-    sources: response,
-  }),
-  // TODO failed のとき (特にjwt のエラー) に適切な処理をする
-)
+    isSearching: true,
+  }))
+  .case(
+    search.async.done,
+    (state, { result: response }) => ({
+      ...state,
+      sources: response,
+      isSearching: false,
+    }),
+    // TODO failed のとき (特にjwt のエラー) に適切な処理をする
+  )
 
 export default reducer
