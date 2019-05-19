@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`auth/FetchSession_DONE 1`] = `
+Snapshot Diff:
+- Before
++ After
+
+  Object {
+    "fetchSessionError": null,
+    "isFetchingSession": false,
+-   "isLogin": false,
++   "isLogin": true,
+    "isLoginRequest": false,
+    "loginError": null,
+    "user": Object {
++     "isMailAuthed": true,
+      "jwt": "some jwt text",
++     "username": "foo",
+    },
+  }
+`;
+
+exports[`auth/FetchSession_FAILED 1`] = `
+Snapshot Diff:
+- Before
++ After
+
+  Object {
+-   "fetchSessionError": null,
++   "fetchSessionError": [Error: some error],
+    "isFetchingSession": false,
+    "isLogin": false,
+    "isLoginRequest": false,
+    "loginError": null,
+    "user": Object {
+-     "jwt": "some jwt text",
++     "jwt": "",
+    },
+  }
+`;
+
+exports[`auth/FetchSession_STARTED 1`] = `
+Snapshot Diff:
+- Before
++ After
+
+  Object {
+    "fetchSessionError": null,
+-   "isFetchingSession": false,
++   "isFetchingSession": true,
+    "isLogin": false,
+    "isLoginRequest": false,
+    "loginError": null,
+    "user": Object {
+      "jwt": "some jwt text",
+    },
+  }
+`;
+
+exports[`auth/LOGOUT 1`] = `
+Snapshot Diff:
+- Before
++ After
+
+  Object {
+    "fetchSessionError": null,
+    "isFetchingSession": false,
+    "isLogin": false,
+    "isLoginRequest": false,
+    "loginError": null,
+-   "user": Object {
+-     "jwt": "some jwt text",
+-   },
++   "user": Object {},
+  }
+`;
+
+exports[`auth/Login_DONE 1`] = `
+Snapshot Diff:
+- Before
++ After
+
+  Object {
+    "fetchSessionError": null,
+    "isFetchingSession": false,
+-   "isLogin": false,
++   "isLogin": true,
+    "isLoginRequest": false,
+    "loginError": null,
+    "user": Object {
++     "isMailAuthed": true,
+      "jwt": "some jwt text",
++     "username": "foo",
+    },
+  }
+`;
+
+exports[`auth/Login_FAILED 1`] = `
+Snapshot Diff:
+- Before
++ After
+
+  Object {
+    "fetchSessionError": null,
+    "isFetchingSession": false,
+    "isLogin": false,
+    "isLoginRequest": false,
+-   "loginError": null,
++   "loginError": [Error: some error],
+    "user": Object {
+      "jwt": "some jwt text",
+    },
+  }
+`;
+
+exports[`auth/Login_STARTED 1`] = `
+Snapshot Diff:
+- Before
++ After
+
+  Object {
+    "fetchSessionError": null,
+    "isFetchingSession": false,
+    "isLogin": false,
+-   "isLoginRequest": false,
++   "isLoginRequest": true,
+    "loginError": null,
+    "user": Object {
+      "jwt": "some jwt text",
+    },
+  }
+`;
+
+exports[`handle initial state 1`] = `
+Snapshot Diff:
+Compared values have no visual difference.
+`;
