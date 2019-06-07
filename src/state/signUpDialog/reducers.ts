@@ -1,16 +1,20 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers'
 import { registerUser } from '../auth/operations'
-import { closeDialog, openDialog } from './actions'
+import { changeFoo, closeDialog, openDialog } from './actions'
+
+export type Foo = 'foo' | 'bar' | 'baz'
 
 export interface State {
   isOpen: boolean
   status: 'default' | 'loading' | 'done'
   registeredUser?: string
+  foo: Foo
 }
 
 const initialState: State = {
   isOpen: false,
   status: 'default',
+  foo: 'foo',
 }
 
 const reducer = reducerWithInitialState(initialState)
@@ -32,5 +36,11 @@ const reducer = reducerWithInitialState(initialState)
     status: 'done',
     registeredUser: result.username,
   }))
+  .case(changeFoo, (state, value) => {
+    return {
+      ...state,
+      foo: value,
+    }
+  })
 
 export default reducer

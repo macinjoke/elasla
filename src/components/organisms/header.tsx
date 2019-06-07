@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import { CONFIG } from '../../constants'
 import { logout as _logout } from '../../state/auth/actions'
 import { openDialog as _openDialog } from '../../state/signUpDialog/actions'
+import { Foo } from '../../state/signUpDialog/reducers'
 import { State } from '../../types'
 
 interface Props {
@@ -15,6 +16,7 @@ interface Props {
   username?: string
   logout: () => void
   openDialog: () => void
+  foo: Foo
 }
 
 const Title = styled(Typography)`
@@ -62,6 +64,7 @@ export default connect(
   (s: State) => ({
     isLogin: s.auth.isLogin,
     username: s.auth.user.username,
+    foo: s.signUpDialog.foo,
   }),
   { logout: _logout, openDialog: _openDialog },
 )(Header)
