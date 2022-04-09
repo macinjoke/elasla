@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^3.8.1",
-    "moment": "^2.22.2",
+    "moment": "^2.29.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-jss": "^8.6.1",
